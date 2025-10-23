@@ -1,0 +1,114 @@
+
+
+/* Crop Activity Module Styles */
+.section-subtitle {
+    color: #6c757d;
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
+#activitySearch, #cropFilter, #growthCropSelect {
+    border-radius: 12px;
+    border: 1px solid #e9ecef;
+    transition: border-color 0.3s ease;
+}
+
+#activitySearch:focus, #cropFilter:focus, #growthCropSelect:focus {
+    border-color: var(--primary-green);
+    box-shadow: 0 0 0 0.2rem rgba(16, 185, 129, 0.25);
+}
+
+/* Table Enhancements */
+#activityTable th {
+    font-weight: 600;
+    color: #495057;
+}
+
+#activityTable td {
+    vertical-align: middle;
+}
+
+.badge {
+    font-size: 0.75rem;
+    padding: 0.5em 0.75em;
+}
+
+.progress {
+    height: 8px;
+    border-radius: 10px;
+    background: #e9ecef;
+}
+
+.progress-bar {
+    border-radius: 10px;
+}
+
+/* Modal Styles */
+#addActivityModal .modal-content {
+    border-radius: 16px;
+    border: none;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+
+
+#addActivityModal .form-check-input:checked {
+    background-color: var(--primary-green);
+    border-color: var(--primary-green);
+}
+
+
+
+.form-check-label {
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.form-check-input:checked + .form-check-label {
+    color: var(--primary-green);
+}
+
+/* Chart Containers */
+#completionChart, #growthChart {
+    max-height: 250px;
+}
+
+/* Dark Mode Adjustments */
+body.dark-mode #activityTable thead {
+    background: #1e293b;
+    color: #f1f5f9;
+}
+
+body.dark-mode .badge {
+    color: #f1f5f9;
+}
+
+body.dark-mode .modal-content {
+    background: #1e293b;
+    color: #f1f5f9;
+}
+
+body.dark-mode .form-control, body.dark-mode .form-select {
+    background: #334155;
+    border-color: #475569;
+    color: #f1f5f9;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .card-header .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+    }
+    
+    #activityTable {
+        font-size: 0.875rem;
+    }
+    
+    .modal-dialog {
+        margin: 1rem;
+    }
+}
+
+
+
