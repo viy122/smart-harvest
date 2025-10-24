@@ -3,6 +3,7 @@
 // expects a working backend/db_connect.php that sets $conn (MySQLi)
 include 'backend/db_connect.php';
 
+
 // fetch tasks from DB
 $tasks = [];
 $sql = "SELECT task_id, task_name, description, icon, category FROM tasks ORDER BY task_name";
@@ -47,6 +48,23 @@ if ($res) {
   .topbar { display:flex; align-items:center; gap:12px; }
   .fc .fc-daygrid-day:hover { background:#eef6f2; cursor:pointer; }
   .selected-date { font-weight:600; color:#0f5132; }
+  .field-card {
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    padding: 15px;
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+    text-align: center;
+  }
+  .field-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .field-card.selected {
+    border-color: #198754;
+    background: #f8fff9;
+  }
 </style>
 
 <div class="container py-4">
@@ -63,7 +81,7 @@ if ($res) {
   <!-- Stepper header -->
   <div class="mb-4">
     <div class="progress" style="height:8px;">
-      <div id="progressBar" class="progress-bar bg-success" role="progressbar" style="width:50%"></div>
+      <div id="progressBar" class="progress-bar bg-success" role="progressbar" style="width:33%"></div>
     </div>
     <div class="d-flex justify-content-between mt-2">
       <small class="text-muted">1) Choose Task</small>
@@ -145,12 +163,41 @@ if ($res) {
     </div>
   </div>
 
+  <!-- STEP 3: Select Field -->
+  <div id="step3" class="step">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <div>
+        <button class="btn btn-outline-secondary btn-sm" onclick="goBackToStep(2)">&larr; Back</button>
+      </div>
+      <div>
+        <span class="text-muted">Selected task:</span>
+        <span id="selectedTaskNameStep3" class="fw-semibold ms-2"></span>
+        <span class="text-muted ms-3">Date:</span>
+        <span id="selectedDateStep3" class="fw-semibold ms-2"></span>
+      </div>
+    </div>
+    <div class="container py-5">
+      <h2 class="text-center mb-4 text-success"><i class="bi bi-geo-alt"></i> Select Fields</h2>
+        <p class="text-muted text-center mb-4">Choose one or more fields where this task will be applied.</p>
+          <div class="row g-3" id="fieldList">
+            <!-- Fields will be dynamically generated here -->
+          </div>
+      <div class="text-center">
+        <button id="continueBtnStep3" class="btn btn-success btn-continue px-4 py-2">Continue</button>
+      </div>
+    </div>
+  </div>
+
+
+
 </div>
 
 <script>
   // ===== STATE =====
   let selectedTask = null;
   let selectedDate = null;
+  let selectedTime = '';
+  let selectedNotes = '';
   let fcCalendar = null;
   let fcRendered = false;
 
@@ -172,6 +219,13 @@ if ($res) {
     const progress = {1: 33, 2: 66, 3: 100}[n] || 0;
     document.getElementById('progressBar').style.width = progress + '%';
 
+    // Update step 3 display if going to step 3
+    if (n === 3) {
+      document.getElementById('selectedTaskNameStep3').textContent = selectedTask ? selectedTask.name : '';
+      document.getElementById('selectedDateStep3').textContent = selectedDate || '';
+      loadFields();
+    }
+
     // Initialize calendar when step 2 is active
     if (n === 2) {
       ensureCalendarInitialized();
@@ -191,6 +245,8 @@ if ($res) {
   function goBackToStep(n) {
     if (n === 1) {
       selectedDate = null;
+      selectedTime = '';
+      selectedNotes = '';
       document.getElementById('selectedDateDisplay').textContent = '— none —';
       document.getElementById('continueBtn').disabled = true;
     }
@@ -226,33 +282,89 @@ if ($res) {
     });
   }
 
+  // ===== CONTINUE BUTTON =====
+  function continueToNext() {
+    selectedTime = document.getElementById('selectedTime').value;
+    selectedNotes = document.getElementById('taskNotes').value || '';
+    goToStep(3);
+  }
+
+  // ===== LOAD FIELDS FOR STEP 3 =====
+ function loadFields() {
+  fetch('http://localhost/Agrilink/backend/api/map/get_fields.php')
+    .then(response => response.json())
+    .then(fields => {
+      const fieldList = document.getElementById('fieldList');
+      fieldList.innerHTML = ''; // Clear previous
+
+      fields.forEach(field => {
+        const col = document.createElement('div');
+        col.classList.add('col-md-3');
+
+        col.innerHTML = `
+          <div class="field-card" data-id="${field.field_id}">
+            <h5>${field.name}</h5>
+            <p class="text-muted mb-1">${field.type || 'Unknown Type'}</p>
+            <small class="text-secondary">${field.area || 'N/A'} ha</small>
+          </div>
+        `;
+
+        fieldList.appendChild(col);
+      });
+
+      // Enable selection toggle
+      document.querySelectorAll('.field-card').forEach(card => {
+        card.addEventListener('click', () => {
+          card.classList.toggle('selected');
+        });
+      });
+
+      // Handle continue button for step 3
+      document.getElementById('continueBtnStep3').addEventListener('click', () => {
+        const selectedFields = [];
+        document.querySelectorAll('.field-card.selected').forEach(card => {
+          selectedFields.push(card.dataset.id);
+        });
+
+        if (selectedFields.length === 0) {
+          alert('Please select at least one field.');
+          return;
+        }
+
+        // Store temporarily in localStorage
+        localStorage.setItem('selectedFields', JSON.stringify(selectedFields));
+        localStorage.setItem('selectedTask', JSON.stringify(selectedTask));
+        localStorage.setItem('selectedDate', selectedDate);
+        localStorage.setItem('selectedTime', selectedTime);
+        localStorage.setItem('selectedNotes', selectedNotes);
+
+        // 🔹 Determine next step based on task type
+          const base = 'layout.php?page=';
+          const taskName = (selectedTask?.name || '').toLowerCase();
+          let nextPage = base + 'assign_farmer'; // default
+
+          if (taskName.includes('clean') || taskName === 'cleaning') {
+            nextPage = base + 'cleaning_task';
+          } else if (taskName.includes('plant') || taskName === 'planting') {
+            nextPage = base + 'planting_task';
+          } else if (taskName.includes('harvest')) {
+            nextPage = base + 'harvest_task';
+          }
+
+          window.location.href = nextPage;
+
+      });
+    }) // ← this closes the .then(fields => { ... })
+    .catch(error => console.error('Error loading fields:', error)); // optional, good for debugging
+}
+
+
   // ===== INITIALIZATION =====
   document.addEventListener('DOMContentLoaded', function() {
     ensureCalendarInitialized();
   });
-
-  // ===== CONTINUE BUTTON =====
-  function continueToNext() {
-    const time = document.getElementById('selectedTime').value;
-    const notes = encodeURIComponent(document.getElementById('taskNotes').value || '');
-    const tid = selectedTask ? selectedTask.id : '';
-    const date = selectedDate || '';
-
-    if (!tid || !date) {
-      alert('Please select a date and task.');
-      return;
-    }
-
-    // use absolute path to avoid relative resolution issues
-    const base = window.location.origin + '/Agrilink';
-   const url = `pages/task_steps/select_field.php?task_id=${encodeURIComponent(tid)}&date=${encodeURIComponent(date)}&time=${encodeURIComponent(time)}&notes=${notes}`;
-    window.location.href = url;
-
-    console.log('Navigating to:', url);
-    window.location.href = url;
-  }
+    
 </script>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-

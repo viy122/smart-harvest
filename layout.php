@@ -1,7 +1,11 @@
 <?php
 $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
 $validPages = ['dashboard', 'analytics', 'market', 'forecast', 'about', 'map', 'harvest', 'settings', 'crops', 'tasks'];
-if (!in_array($page, $validPages)) {
+
+// Add your task step pages to the whitelist
+$taskStepPages = ['cleaning_task', 'review_task', 'assign_farmer', 'planting_task', 'harvest_task'];
+
+if (!in_array($page, array_merge($validPages, $taskStepPages))) {
     $page = 'dashboard';
 }
 ?>
@@ -39,14 +43,12 @@ if (!in_array($page, $validPages)) {
             padding: 1.5rem;
         }
 
-        /* ✅ Active link style */
         .nav-link.active {
             background-color: #10b981 !important;
             color: #fff !important;
             border-radius: 8px;
         }
 
-        /* ✅ Loader style (optional if you want preloader animation) */
         #page-loader {
             position: fixed;
             inset: 0;
@@ -76,7 +78,7 @@ if (!in_array($page, $validPages)) {
     <div class="main-content">
         <?php include 'includes/header.php'; ?>
 
-        <!-- ✅ Page Loader (optional visual effect) -->
+        <!-- ✅ Page Loader -->
         <div id="page-loader">
             <div class="spinner-border text-success" role="status">
                 <span class="visually-hidden">Loading...</span>
@@ -84,9 +86,21 @@ if (!in_array($page, $validPages)) {
             <p>Loading, please wait...</p>
         </div>
 
-        <!-- ✅ Load correct page -->
+        <!-- ✅ Page Content -->
         <main>
-            <?php include "pages/{$page}.php"; ?>
+            <?php
+            // Support both normal and task_steps pages
+            $mainPath = "pages/{$page}.php";
+            $subPath = "pages/task_steps/{$page}.php";
+
+            if (file_exists($mainPath)) {
+                include $mainPath;
+            } elseif (file_exists($subPath)) {
+                include $subPath;
+            } else {
+                include "pages/dashboard.php"; // fallback
+            }
+            ?>
         </main>
     </div>
 </div>
@@ -95,11 +109,9 @@ if (!in_array($page, $validPages)) {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
-<!-- ✅ Optional JS for per-page initialization -->
+<!-- ✅ Optional JS per-page -->
 <?php if ($page === 'dashboard'): ?>
 <script src="assets/js/dashboard.js"></script>
-
-
 <script> if (typeof dashboardInit === "function") dashboardInit(); </script>
 
 <?php elseif ($page === 'analytics'): ?>
