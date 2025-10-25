@@ -70,7 +70,6 @@ if ($res) {
 <div class="container py-4">
   <div class="d-flex justify-content-between align-items-center mb-3">
     <div class="topbar">
-      <a href="javascript:history.back()" class="text-decoration-none">&larr;</a>
       <h4 class="m-0">Add Task</h4>
     </div>
     <div>

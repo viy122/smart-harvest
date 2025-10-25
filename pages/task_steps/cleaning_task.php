@@ -12,6 +12,8 @@ include_once 'includes/navbar.php';
   <div class="container py-5">
     <div class="card shadow-sm mx-auto" style="max-width: 800px;">
       <div class="card-body p-4">
+        <button class="btn btn-outline-secondary btn-sm mb-3" onclick="goBackToStep(1)">&larr; Back</button>
+
         <h2 class="text-center mb-3 text-success"><i class="bi bi-brush"></i> Cleaning Task Details</h2>
         <p class="text-muted text-center mb-4">Tell us more about this cleaning activity.</p>
 
@@ -117,6 +119,13 @@ include_once 'includes/navbar.php';
     localStorage.setItem('cleaningTaskDetails', JSON.stringify(data));
     window.location.href = 'review_task.php';
   });
+
+    function goBackToStep(stepNumber) {
+    // Navigate back to the Tasks page and open the correct step
+    const base = window.location.origin + '/Agrilink';
+    window.location.href = `${base}/layout.php?page=tasks&step=${stepNumber}`;
+  }
+
 </script>
 
 
