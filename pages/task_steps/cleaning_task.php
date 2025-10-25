@@ -1,8 +1,7 @@
 <?php
 
 include_once 'backend/db_connect.php';
-include_once 'includes/header.php';
-include_once 'includes/navbar.php';
+
 
 
 ?>
@@ -104,27 +103,25 @@ include_once 'includes/navbar.php';
   document.getElementById('useCleanerNo').addEventListener('change', () => cleanerDetails.style.display = 'none');
 
   document.getElementById('continueBtn').addEventListener('click', () => {
-    const data = {
-      cleanTarget: document.getElementById('cleanTarget').value.trim(),
-      useCleaner: document.querySelector('input[name="useCleaner"]:checked')?.value || '',
-      product: document.getElementById('product').value.trim(),
-      supplier: document.getElementById('supplier').value.trim(),
-      quantity: document.getElementById('quantity').value,
-      unit: document.getElementById('unit').value,
-      waterUsage: document.getElementById('waterUsage').value,
-      specificNotes: document.getElementById('specificNotes').value.trim(),
-      instructions: document.getElementById('instructions').value.trim(),
-    };
+  const data = {
+    cleanTarget: document.getElementById('cleanTarget').value.trim(),
+    useCleaner: document.querySelector('input[name="useCleaner"]:checked')?.value || '',
+    product: document.getElementById('product').value.trim(),
+    supplier: document.getElementById('supplier').value.trim(),
+    quantity: document.getElementById('quantity').value,
+    unit: document.getElementById('unit').value,
+    waterUsage: document.getElementById('waterUsage').value,
+    specificNotes: document.getElementById('specificNotes').value.trim(),
+    instructions: document.getElementById('instructions').value.trim(),
+  };
 
-    localStorage.setItem('cleaningTaskDetails', JSON.stringify(data));
-    window.location.href = 'review_task.php';
-  });
+  // save current step details temporarily
+  localStorage.setItem('cleaningTaskDetails', JSON.stringify(data));
 
-    function goBackToStep(stepNumber) {
-    // Navigate back to the Tasks page and open the correct step
-    const base = window.location.origin + '/Agrilink';
-    window.location.href = `${base}/layout.php?page=tasks&step=${stepNumber}`;
-  }
+  // go to the next step — assign farmer
+  const base = window.location.origin + '/Agrilink';
+  window.location.href = `${base}/layout.php?page=assign_farmer`;
+});
 
 </script>
 
