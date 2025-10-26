@@ -11,7 +11,8 @@ include_once 'backend/db_connect.php';
   <div class="container py-5">
     <div class="card shadow-sm mx-auto" style="max-width: 800px;">
       <div class="card-body p-4">
-        <button class="btn btn-outline-secondary btn-sm mb-3" onclick="goBackToStep(1)">&larr; Back</button>
+        <button class="btn btn-outline-secondary btn-sm mb-3" onclick="goBackToTasks()">&larr; Back</button>
+
 
         <h2 class="text-center mb-3 text-success"><i class="bi bi-brush"></i> Cleaning Task Details</h2>
         <p class="text-muted text-center mb-4">Tell us more about this cleaning activity.</p>
@@ -122,6 +123,14 @@ include_once 'backend/db_connect.php';
   const base = window.location.origin + '/Agrilink';
   window.location.href = `${base}/layout.php?page=assign_farmer`;
 });
+
+
+function goBackToTasks() {
+  const base = window.location.origin + '/Agrilink';
+  window.location.href = `${base}/layout.php?page=tasks`;
+}
+
+
 
 </script>
 

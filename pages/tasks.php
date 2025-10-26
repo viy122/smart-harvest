@@ -191,179 +191,181 @@ if ($res) {
 
 </div>
 
-<script>
-  // ===== STATE =====
-  let selectedTask = null;
-  let selectedDate = null;
-  let selectedTime = '';
-  let selectedNotes = '';
-  let fcCalendar = null;
-  let fcRendered = false;
+  <script>
+    // ===== STATE =====
+    let selectedTask = null;
+    let selectedDate = null;
+    let selectedTime = '';
+    let selectedNotes = '';
+    let fcCalendar = null;
+    let fcRendered = false;
 
-  // ===== STEP FUNCTIONS =====
-  function chooseTask(el) {
-    const taskId = el.getAttribute('data-taskid');
-    const taskName = el.getAttribute('data-taskname');
+    // ===== STEP FUNCTIONS =====
+    function chooseTask(el) {
+      const taskId = el.getAttribute('data-taskid');
+      const taskName = el.getAttribute('data-taskname');
 
-    selectedTask = { id: taskId, name: taskName };
-    document.getElementById('selectedTaskName').textContent = taskName;
-    goToStep(2);
-  }
-
-  function goToStep(n) {
-    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-    document.getElementById('step' + n).classList.add('active');
-
-    // Progress bar update
-    const progress = {1: 33, 2: 66, 3: 100}[n] || 0;
-    document.getElementById('progressBar').style.width = progress + '%';
-
-    // Update step 3 display if going to step 3
-    if (n === 3) {
-      document.getElementById('selectedTaskNameStep3').textContent = selectedTask ? selectedTask.name : '';
-      document.getElementById('selectedDateStep3').textContent = selectedDate || '';
-      loadFields();
+      selectedTask = { id: taskId, name: taskName };
+      document.getElementById('selectedTaskName').textContent = taskName;
+      goToStep(2);
     }
 
-    // Initialize calendar when step 2 is active
-    if (n === 2) {
-      ensureCalendarInitialized();
-      if (!fcRendered) {
-        try {
-          fcCalendar.render();
-          fcRendered = true;
-        } catch (err) {
-          console.error('Error rendering calendar:', err);
+    function goToStep(n) {
+      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+      document.getElementById('step' + n).classList.add('active');
+
+      // Progress bar update
+      const progress = {1: 33, 2: 66, 3: 100}[n] || 0;
+      document.getElementById('progressBar').style.width = progress + '%';
+
+      // Update step 3 display if going to step 3
+      if (n === 3) {
+        document.getElementById('selectedTaskNameStep3').textContent = selectedTask ? selectedTask.name : '';
+        document.getElementById('selectedDateStep3').textContent = selectedDate || '';
+        loadFields();
+      }
+
+      // Initialize calendar when step 2 is active
+      if (n === 2) {
+        ensureCalendarInitialized();
+        if (!fcRendered) {
+          try {
+            fcCalendar.render();
+            fcRendered = true;
+          } catch (err) {
+            console.error('Error rendering calendar:', err);
+          }
+        } else {
+          try { fcCalendar.updateSize(); } catch (e) { /* ignore */ }
         }
-      } else {
-        try { fcCalendar.updateSize(); } catch (e) { /* ignore */ }
       }
     }
-  }
 
-  function goBackToStep(n) {
-    if (n === 1) {
-      selectedDate = null;
-      selectedTime = '';
-      selectedNotes = '';
-      document.getElementById('selectedDateDisplay').textContent = '— none —';
-      document.getElementById('continueBtn').disabled = true;
-    }
-    goToStep(n);
-  }
-
-  // ===== CALENDAR SETUP =====
-  function ensureCalendarInitialized() {
-    if (fcCalendar) return;
-    const calendarEl = document.getElementById('calendar');
-    if (!calendarEl) {
-      console.error('Calendar element not found (#calendar)');
-      return;
-    }
-    if (typeof FullCalendar === 'undefined' || !FullCalendar.Calendar) {
-      console.error('FullCalendar library not loaded');
-      calendarEl.innerHTML = '<div class="alert alert-danger">Calendar library failed to load.</div>';
-      return;
-    }
-
-    fcCalendar = new FullCalendar.Calendar(calendarEl, {
-      initialView: 'dayGridMonth',
-      dayMaxEvents: true,
-      selectable: true,
-      dateClick: function(info) {
-        selectedDate = info.dateStr;
-        document.getElementById('selectedDateDisplay').textContent = selectedDate;
-        document.getElementById('continueBtn').disabled = false;
-      },
-      validRange: function(nowDate) {
-        return { start: nowDate }; // today + future only
+    function goBackToStep(n) {
+      if (n === 1) {
+        selectedDate = null;
+        selectedTime = '';
+        selectedNotes = '';
+        document.getElementById('selectedDateDisplay').textContent = '— none —';
+        document.getElementById('continueBtn').disabled = true;
       }
-    });
-  }
+      goToStep(n);
+    }
 
-  // ===== CONTINUE BUTTON =====
-  function continueToNext() {
-    selectedTime = document.getElementById('selectedTime').value;
-    selectedNotes = document.getElementById('taskNotes').value || '';
-    goToStep(3);
-  }
+    // ===== CALENDAR SETUP =====
+    function ensureCalendarInitialized() {
+      if (fcCalendar) return;
+      const calendarEl = document.getElementById('calendar');
+      if (!calendarEl) {
+        console.error('Calendar element not found (#calendar)');
+        return;
+      }
+      if (typeof FullCalendar === 'undefined' || !FullCalendar.Calendar) {
+        console.error('FullCalendar library not loaded');
+        calendarEl.innerHTML = '<div class="alert alert-danger">Calendar library failed to load.</div>';
+        return;
+      }
 
-  // ===== LOAD FIELDS FOR STEP 3 =====
- function loadFields() {
-  fetch('http://localhost/Agrilink/backend/api/map/get_fields.php')
-    .then(response => response.json())
-    .then(fields => {
-      const fieldList = document.getElementById('fieldList');
-      fieldList.innerHTML = ''; // Clear previous
-
-      fields.forEach(field => {
-        const col = document.createElement('div');
-        col.classList.add('col-md-3');
-
-        col.innerHTML = `
-          <div class="field-card" data-id="${field.field_id}">
-            <h5>${field.name}</h5>
-            <p class="text-muted mb-1">${field.type || 'Unknown Type'}</p>
-            <small class="text-secondary">${field.area || 'N/A'} ha</small>
-          </div>
-        `;
-
-        fieldList.appendChild(col);
-      });
-
-      // Enable selection toggle
-      document.querySelectorAll('.field-card').forEach(card => {
-        card.addEventListener('click', () => {
-          card.classList.toggle('selected');
-        });
-      });
-
-      // Handle continue button for step 3
-      document.getElementById('continueBtnStep3').addEventListener('click', () => {
-        const selectedFields = [];
-        document.querySelectorAll('.field-card.selected').forEach(card => {
-          selectedFields.push(card.dataset.id);
-        });
-
-        if (selectedFields.length === 0) {
-          alert('Please select at least one field.');
-          return;
+      fcCalendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        dayMaxEvents: true,
+        selectable: true,
+        dateClick: function(info) {
+          selectedDate = info.dateStr;
+          document.getElementById('selectedDateDisplay').textContent = selectedDate;
+          document.getElementById('continueBtn').disabled = false;
+        },
+        validRange: function(nowDate) {
+          return { start: nowDate }; // today + future only
         }
+      });
+    }
 
-        // Store temporarily in localStorage
-        localStorage.setItem('selectedFields', JSON.stringify(selectedFields));
-        localStorage.setItem('selectedTask', JSON.stringify(selectedTask));
-        localStorage.setItem('selectedDate', selectedDate);
-        localStorage.setItem('selectedTime', selectedTime);
-        localStorage.setItem('selectedNotes', selectedNotes);
+    // ===== CONTINUE BUTTON =====
+    function continueToNext() {
+      selectedTime = document.getElementById('selectedTime').value;
+      selectedNotes = document.getElementById('taskNotes').value || '';
+      goToStep(3);
+    }
 
-        // 🔹 Determine next step based on task type
-          const base = 'layout.php?page=';
-          const taskName = (selectedTask?.name || '').toLowerCase();
-          let nextPage = base + 'assign_farmer'; // default
+    // ===== LOAD FIELDS FOR STEP 3 =====
+  function loadFields() {
+    fetch('http://localhost/Agrilink/backend/api/map/get_fields.php')
+      .then(response => response.json())
+      .then(fields => {
+        const fieldList = document.getElementById('fieldList');
+        fieldList.innerHTML = ''; // Clear previous
 
-          if (taskName.includes('clean') || taskName === 'cleaning') {
-            nextPage = base + 'cleaning_task';
-          } else if (taskName.includes('plant') || taskName === 'planting') {
-            nextPage = base + 'planting_task';
-          } else if (taskName.includes('harvest')) {
-            nextPage = base + 'harvest_task';
+        fields.forEach(field => {
+          const col = document.createElement('div');
+          col.classList.add('col-md-3');
+
+          col.innerHTML = `
+            <div class="field-card" data-id="${field.field_id}">
+              <h5>${field.name}</h5>
+              <p class="text-muted mb-1">${field.type || 'Unknown Type'}</p>
+              <small class="text-secondary">${field.area || 'N/A'} ha</small>
+            </div>
+          `;
+
+          fieldList.appendChild(col);
+        });
+
+        // Enable selection toggle
+        document.querySelectorAll('.field-card').forEach(card => {
+          card.addEventListener('click', () => {
+            card.classList.toggle('selected');
+          });
+        });
+
+        // Handle continue button for step 3
+        document.getElementById('continueBtnStep3').addEventListener('click', () => {
+          const selectedFields = [];
+          document.querySelectorAll('.field-card.selected').forEach(card => {
+            selectedFields.push(card.dataset.id);
+          });
+
+          if (selectedFields.length === 0) {
+            alert('Please select at least one field.');
+            return;
           }
 
-          window.location.href = nextPage;
+          // Store temporarily in localStorage
+          localStorage.setItem('selectedFields', JSON.stringify(selectedFields));
+          localStorage.setItem('selectedTask', JSON.stringify(selectedTask));
+          localStorage.setItem('selectedDate', selectedDate);
+          localStorage.setItem('selectedTime', selectedTime);
+          localStorage.setItem('selectedNotes', selectedNotes);
 
-      });
-    }) // ← this closes the .then(fields => { ... })
-    .catch(error => console.error('Error loading fields:', error)); // optional, good for debugging
-}
+          // 🔹 Determine next step based on task type
+            const base = 'layout.php?page=';
+            const taskName = (selectedTask?.name || '').toLowerCase();
+            let nextPage = base + 'assign_farmer'; // default
+
+            if (taskName.includes('clean') || taskName === 'cleaning') {
+              nextPage = base + 'cleaning_task';
+            } else if (taskName.includes('plant') || taskName === 'planting') {
+              nextPage = base + 'planting_task';
+            } else if (taskName.includes('harvest')) {
+              nextPage = base + 'harvest_task';
+            }
+
+            localStorage.setItem('taskType', taskName);
+
+            window.location.href = nextPage;
+
+        });
+      }) // ← this closes the .then(fields => { ... })
+      .catch(error => console.error('Error loading fields:', error)); // optional, good for debugging
+  }
 
 
-  // ===== INITIALIZATION =====
-  document.addEventListener('DOMContentLoaded', function() {
-    ensureCalendarInitialized();
-  });
-    
-</script>
+    // ===== INITIALIZATION =====
+    document.addEventListener('DOMContentLoaded', function() {
+      ensureCalendarInitialized();
+    });
+      
+  </script>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

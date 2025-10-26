@@ -1,6 +1,7 @@
 <?php
 include_once 'backend/db_connect.php'; // adjust path if needed
 
+
 // Fetch all farmers from the database
 $query = "SELECT * FROM farmers";
 $result = $conn->query($query);
@@ -52,30 +53,52 @@ document.getElementById('assignFarmerForm').addEventListener('submit', async (e)
   }
 
   // Retrieve previously stored task or field data if needed
-  const selectedFields = JSON.parse(localStorage.getItem('selectedFields') || '[]');
-  const selectedTask = localStorage.getItem('selectedTask') || '';
+      const selectedFields = JSON.parse(localStorage.getItem('selectedFields') || '[]');
+      const selectedTask = localStorage.getItem('selectedTask') || '';
+      const taskType = localStorage.getItem('taskType') || '';
 
-  try {
-    const res = await fetch('../../backend/api/save_assignment.php', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        farmer_ids: selected,
-        fields: selectedFields,
-        task: selectedTask
-      })
-    });
+      // Include task-specific details
+      let taskDetails = {};
+      if (taskType.includes('clean')) {
+        taskDetails = JSON.parse(localStorage.getItem('cleaningTaskDetails') || '{}');
+      } else if (taskType.includes('plant')) {
+        taskDetails = JSON.parse(localStorage.getItem('plantingTaskDetails') || '{}');
+      } else if (taskType.includes('harvest')) {
+        taskDetails = JSON.parse(localStorage.getItem('harvestTaskDetails') || '{}');
+      }
 
-    const data = await res.json();
-    if (data.success) {
-      alert('✅ Farmers successfully assigned!');
-      window.location.href = '../../layout.php?page=tasks'; // go back or next step
-    } else {
-      alert('❌ Failed to save assignment.');
+
+      try { 
+      const res = await fetch('/Agrilink/backend/api/save_field_task.php', {
+
+
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          farmer_ids: selected,
+          fields: selectedFields,
+          task: selectedTask,
+          task_type: taskType,
+          details: taskDetails
+        })
+      });
+
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+
+      const data = await res.json();
+      if (data.success) {
+        alert('✅ Farmers successfully assigned!');
+        window.location.href = '../../layout.php?page=tasks';
+      } else {
+        alert('❌ Failed to save assignment.');
+      }
+    } catch (err) {
+      console.error('Error:', err);
+      alert('Error saving assignment.');
     }
-  } catch (err) {
-    console.error('Error:', err);
-    alert('Error saving assignment.');
-  }
+
+
 });
 </script>

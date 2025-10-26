@@ -1,0 +1,28 @@
+Array
+(
+    [farmer_ids] => Array
+        (
+            [0] => 1
+        )
+
+    [fields] => Array
+        (
+            [0] => 16
+        )
+
+    [task] => {"id":"10","name":"Cleaning"}
+    [task_type] => cleaning
+    [details] => Array
+        (
+            [cleanTarget] => tools
+            [useCleaner] => yes
+            [product] => zonrox
+            [supplier] => 
+            [quantity] => 10
+            [unit] => L
+            [waterUsage] => 1
+            [specificNotes] => none
+            [instructions] => wear gear
+        )
+
+)
