@@ -1,7 +1,8 @@
+
 <?php
 include '../../db_connect.php';
 
-$farmer_id = 1; // example only — replace with $_SESSION['farmer_id'] when you add login
+$farmer_id = 1; // example only — replace with $_SESSION['farmer_id'] when login is added
 
 // ✅ Get crops that the farmer already has in any of their fields
 $onFarmQuery = "
@@ -9,6 +10,7 @@ $onFarmQuery = "
         c.crop_id,
         c.crop_name,
         c.image_path,
+        c.duration,           -- 🟢 Added duration column
         fc.field_id
     FROM crops c
     INNER JOIN field_crops fc ON c.crop_id = fc.crop_id
@@ -23,7 +25,8 @@ $notOnFarmQuery = "
     SELECT 
         c.crop_id,
         c.crop_name,
-        c.image_path
+        c.image_path,
+        c.duration            -- 🟢 Added duration column
     FROM crops c
     WHERE c.crop_id NOT IN (
         SELECT fc.crop_id
@@ -42,5 +45,5 @@ $response = [
 ];
 
 header('Content-Type: application/json');
-echo json_encode($response);
+echo json_encode($response, JSON_PRETTY_PRINT);
 ?>

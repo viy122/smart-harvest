@@ -7,22 +7,22 @@ Array
 
     [fields] => Array
         (
-            [0] => 16
+            [0] => 17
         )
 
-    [task] => {"id":"10","name":"Cleaning"}
-    [task_type] => cleaning
+    [task] => {"id":"8","name":"Field Cleaning"}
+    [task_type] => field cleaning
     [details] => Array
         (
-            [cleanTarget] => tools
-            [useCleaner] => yes
-            [product] => zonrox
+            [cleanTarget] => 
+            [useCleaner] => 
+            [product] => 
             [supplier] => 
-            [quantity] => 10
+            [quantity] => 
             [unit] => L
-            [waterUsage] => 1
-            [specificNotes] => none
-            [instructions] => wear gear
+            [waterUsage] => 
+            [specificNotes] => 
+            [instructions] => 
         )
 
 )

@@ -331,24 +331,35 @@ if ($res) {
           }
 
           // Store temporarily in localStorage
+          // ✅ Store temporarily in localStorage
           localStorage.setItem('selectedFields', JSON.stringify(selectedFields));
+          localStorage.setItem('selectedFieldId', selectedFields[0]); // ← store first field for next page
           localStorage.setItem('selectedTask', JSON.stringify(selectedTask));
           localStorage.setItem('selectedDate', selectedDate);
           localStorage.setItem('selectedTime', selectedTime);
           localStorage.setItem('selectedNotes', selectedNotes);
+
 
           // 🔹 Determine next step based on task type
             const base = 'layout.php?page=';
             const taskName = (selectedTask?.name || '').toLowerCase();
             let nextPage = base + 'assign_farmer'; // default
 
-            if (taskName.includes('clean') || taskName === 'cleaning') {
+            if (taskName.includes('clean') || taskName === 'cleaning') {  
               nextPage = base + 'cleaning_task';
             } else if (taskName.includes('plant') || taskName === 'planting') {
               nextPage = base + 'planting_task';
+            } else if (taskName.includes('fertiliz') || taskName === 'fertilizing') {
+              nextPage = base + 'fertilizing_task';
             } else if (taskName.includes('harvest')) {
               nextPage = base + 'harvest_task';
+            } else if (taskName.includes('field_cleaning')) {
+              nextPage = base + 'cleaning_task';
+            } else if (taskName.includes('pest_control')) {
+              nextPage = base + 'pest_control';
             }
+
+
 
             localStorage.setItem('taskType', taskName);
 

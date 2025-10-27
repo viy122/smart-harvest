@@ -3,7 +3,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
 $validPages = ['dashboard', 'analytics', 'market', 'forecast', 'about', 'map', 'harvest', 'settings', 'crops', 'tasks'];
 
 // Add your task step pages to the whitelist
-$taskStepPages = ['cleaning_task', 'review_task', 'assign_farmer', 'planting_task', 'harvest_task'];
+$taskStepPages = ['cleaning_task', 'review_task', 'assign_farmer', 'planting_task', 'harvest_task', 'fertilizing_task', 'default_task' , 'pest_control'];
 
 if (!in_array($page, array_merge($validPages, $taskStepPages))) {
     $page = 'dashboard';

@@ -1,9 +1,5 @@
 <?php
-
 include_once 'backend/db_connect.php';
-
-
-
 ?>
 
 <!-- PAGE WRAPPER -->
