@@ -1,0 +1,905 @@
+Input: Array
+(
+    [N] => 34
+    [P] => 34
+    [K] => 34
+    [ph] => 34
+    [city] => Balayan
+)
+
+Payload to Python: {"N":34,"P":34,"K":34,"ph":34,"city":"Balayan"}
+Python stdout: 
+Python stderr: Fatal Python error: _Py_HashRandomization_Init: failed to get random numbers to initialize Python
+Python runtime state: preinitialized
+
+
+Return code: 1
+Input: Array
+(
+    [N] => 23
+    [P] => 23
+    [K] => 23
+    [ph] => 23
+    [city] => Balayan
+)
+
+Payload to Python: {"N":23,"P":23,"K":23,"ph":23,"city":"Balayan"}
+Failed to start Python process
+Input: Array
+(
+    [N] => 23
+    [P] => 23
+    [K] => 23
+    [ph] => 23
+    [city] => Balayan
+)
+
+Payload to Python: {"N":23,"P":23,"K":23,"ph":23,"city":"Balayan"}
+Python stdout: 
+Python stderr: Traceback (most recent call last):
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py", line 2, in <module>
+    import requests
+ModuleNotFoundError: No module named 'requests'
+
+Return code: 1
+Input: Array
+(
+    [N] => 34
+    [P] => 34
+    [K] => 34
+    [ph] => 34
+    [city] => Balayan
+)
+
+Payload to Python: {"N":34,"P":34,"K":34,"ph":34,"city":"Balayan"}
+Python stdout: 
+Python stderr: Traceback (most recent call last):
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py", line 2, in <module>
+    import requests
+ModuleNotFoundError: No module named 'requests'
+
+Return code: 1
+Input: Array
+(
+    [N] => 12
+    [P] => 12
+    [K] => 12
+    [ph] => 12
+    [city] => Balayan
+)
+
+Payload to Python: {"N":12,"P":12,"K":12,"ph":12,"city":"Balayan"}
+Python stdout: 
+Python stderr: Traceback (most recent call last):
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py", line 6, in <module>
+    from smart_care_model import CropPredictor
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\smart_care_model.py", line 4, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+
+Return code: 1
+Input: Array
+(
+    [N] => 90
+    [P] => 40
+    [K] => 45
+    [ph] => 6.5
+    [city] => Balayan
+)
+
+Payload to Python: {"N":90,"P":40,"K":45,"ph":6.5,"city":"Balayan"}
+Python stdout: 
+Python stderr: Traceback (most recent call last):
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py", line 6, in <module>
+    from smart_care_model import CropPredictor
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\smart_care_model.py", line 5, in <module>
+    import joblib
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\joblib\__init__.py", line 120, in <module>
+    from .memory import MemorizedResult, Memory, expires_after, register_store_backend
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\joblib\memory.py", line 11, in <module>
+    import asyncio
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\__init__.py", line 45, in <module>
+    from .windows_events import *
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\windows_events.py", line 8, in <module>
+    import _overlapped
+OSError: [WinError 10106] The requested service provider could not be loaded or initialized
+
+Return code: 1
+Input: Array
+(
+    [N] => 12
+    [P] => 12
+    [K] => 12
+    [ph] => 12
+    [city] => Balayan
+)
+
+Payload to Python: {"N":12,"P":12,"K":12,"ph":12,"city":"Balayan"}
+Python stdout: 
+Python stderr: Traceback (most recent call last):
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py", line 6, in <module>
+    from smart_care_model import CropPredictor
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\smart_care_model.py", line 5, in <module>
+    import joblib
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\joblib\__init__.py", line 120, in <module>
+    from .memory import MemorizedResult, Memory, expires_after, register_store_backend
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\joblib\memory.py", line 11, in <module>
+    import asyncio
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\__init__.py", line 45, in <module>
+    from .windows_events import *
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\windows_events.py", line 8, in <module>
+    import _overlapped
+OSError: [WinError 10106] The requested service provider could not be loaded or initialized
+
+Return code: 1
+Input: Array
+(
+    [N] => 90
+    [P] => 40
+    [K] => 45
+    [ph] => 6.5
+    [city] => Balayan
+)
+
+Payload to Python: {"N":90,"P":40,"K":45,"ph":6.5,"city":"Balayan"}
+Failed to start Python process
+Input: Array
+(
+    [N] => 23
+    [P] => 243
+    [K] => 24
+    [ph] => 234
+    [city] => Balayan
+)
+
+Payload to Python: {"N":23,"P":243,"K":24,"ph":234,"city":"Balayan"}
+Python stdout: 
+Python stderr: Traceback (most recent call last):
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py", line 6, in <module>
+    from smart_care_model import CropPredictor
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\smart_care_model.py", line 5, in <module>
+    import joblib
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\__init__.py", line 120, in <module>
+    from .memory import MemorizedResult, Memory, expires_after, register_store_backend
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\memory.py", line 11, in <module>
+    import asyncio
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\asyncio\__init__.py", line 42, in <module>
+    from .windows_events import *
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\asyncio\windows_events.py", line 8, in <module>
+    import _overlapped
+OSError: [WinError 10106] The requested service provider could not be loaded or initialized
+
+Return code: 1
+=== INPUT ===
+Array
+(
+    [N] => 34
+    [P] => 34
+    [K] => 34
+    [ph] => 34
+    [city] => Balayan
+)
+
+=== PAYLOAD TO PYTHON ===
+{"N":34,"P":34,"K":34,"ph":34,"city":"Balayan"}
+=== PYTHON OUTPUT ===
+STDOUT:
+
+STDERR:
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\smart_care_engine.py", line 6, in <module>
+    from smart_care_model import CropPredictor
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\smart_care_model.py", line 5, in <module>
+    import joblib
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\__init__.py", line 120, in <module>
+    from .memory import MemorizedResult, Memory, expires_after, register_store_backend
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\memory.py", line 11, in <module>
+    import asyncio
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\asyncio\__init__.py", line 42, in <module>
+    from .windows_events import *
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\asyncio\windows_events.py", line 8, in <module>
+    import _overlapped
+OSError: [WinError 10106] The requested service provider could not be loaded or initialized
+
+Return code: 1
+Input: Array
+(
+    [N] => 12
+    [P] => 12
+    [K] => 12
+    [ph] => 12
+    [city] => Balayan
+)
+
+Payload to Python: {"N":12,"P":12,"K":12,"ph":12,"city":"Balayan"}
+Python stdout: 
+Python stderr: Traceback (most recent call last):
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py", line 6, in <module>
+    from smart_care_model import CropPredictor
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\smart_care_model.py", line 5, in <module>
+    import joblib
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\__init__.py", line 120, in <module>
+    from .memory import MemorizedResult, Memory, expires_after, register_store_backend
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\memory.py", line 11, in <module>
+    import asyncio
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\asyncio\__init__.py", line 42, in <module>
+    from .windows_events import *
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\asyncio\windows_events.py", line 8, in <module>
+    import _overlapped
+OSError: [WinError 10106] The requested service provider could not be loaded or initialized
+
+Return code: 1
+[2025-11-02 14:56:58] Input: Array
+(
+    [N] => 23
+    [P] => 23
+    [K] => 23
+    [ph] => 23
+    [city] => Balayan
+)
+
+[2025-11-02 14:56:58] Payload to Python: {"N":23,"P":23,"K":23,"ph":23,"city":"Balayan"}
+[2025-11-02 14:57:00] Python stdout: 
+Python stderr: Traceback (most recent call last):
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\smart_care_engine.py", line 6, in <module>
+    from smart_care_model import CropPredictor
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\smart_care_model.py", line 5, in <module>
+    import joblib
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\__init__.py", line 120, in <module>
+    from .memory import MemorizedResult, Memory, expires_after, register_store_backend
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\memory.py", line 11, in <module>
+    import asyncio
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\asyncio\__init__.py", line 42, in <module>
+    from .windows_events import *
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\asyncio\windows_events.py", line 8, in <module>
+    import _overlapped
+OSError: [WinError 10106] The requested service provider could not be loaded or initialized
+
+Return code: 1
+[2025-11-02 15:01:33] Input: Array
+(
+    [N] => 32
+    [P] => 32
+    [K] => 32
+    [ph] => 23
+    [city] => Balayan
+)
+
+[2025-11-02 15:01:33] Payload to Python: {"N":32,"P":32,"K":32,"ph":23,"city":"Balayan"}
+[2025-11-02 15:01:34] Python stdout: 
+Python stderr: Traceback (most recent call last):
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\smart_care_engine.py", line 6, in <module>
+    from smart_care_model import CropPredictor
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\smart_care_model.py", line 5, in <module>
+    import joblib
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\__init__.py", line 120, in <module>
+    from .memory import MemorizedResult, Memory, expires_after, register_store_backend
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\memory.py", line 11, in <module>
+    import asyncio
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\asyncio\__init__.py", line 42, in <module>
+    from .windows_events import *
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\asyncio\windows_events.py", line 8, in <module>
+    import _overlapped
+OSError: [WinError 10106] The requested service provider could not be loaded or initialized
+
+Return code: 1
+[2025-11-02 15:01:38] Input: Array
+(
+    [N] => 32
+    [P] => 32
+    [K] => 32
+    [ph] => 23
+    [city] => Balayan
+)
+
+[2025-11-02 15:01:38] Payload to Python: {"N":32,"P":32,"K":32,"ph":23,"city":"Balayan"}
+[2025-11-02 15:01:38] Python stdout: 
+Python stderr: Traceback (most recent call last):
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\smart_care_engine.py", line 6, in <module>
+    from smart_care_model import CropPredictor
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\smart_care_model.py", line 5, in <module>
+    import joblib
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\__init__.py", line 120, in <module>
+    from .memory import MemorizedResult, Memory, expires_after, register_store_backend
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\memory.py", line 11, in <module>
+    import asyncio
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\asyncio\__init__.py", line 42, in <module>
+    from .windows_events import *
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\asyncio\windows_events.py", line 8, in <module>
+    import _overlapped
+OSError: [WinError 10106] The requested service provider could not be loaded or initialized
+
+Return code: 1
+[2025-11-02 15:16:49] Input: Array
+(
+    [N] => 70
+    [P] => 70
+    [K] => 70
+    [ph] => 70
+    [city] => Balayan
+)
+
+[2025-11-02 15:16:49] Payload to Python: {"N":70,"P":70,"K":70,"ph":70,"city":"Balayan"}
+[2025-11-02 15:16:53] Python stdout: 
+Python stderr: Traceback (most recent call last):
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py", line 6, in <module>
+    from smart_care_model import CropPredictor
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\smart_care_model.py", line 5, in <module>
+    import joblib
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\__init__.py", line 120, in <module>
+    from .memory import MemorizedResult, Memory, expires_after, register_store_backend
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\site-packages\joblib\memory.py", line 11, in <module>
+    import asyncio
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\asyncio\__init__.py", line 42, in <module>
+    from .windows_events import *
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python311\Lib\asyncio\windows_events.py", line 8, in <module>
+    import _overlapped
+OSError: [WinError 10106] The requested service provider could not be loaded or initialized
+
+Return code: 1
+[2025-11-02 15:17:06] Input: Array
+(
+)
+  
+[2025-11-02 16:37:50] Input: Array
+(
+    [N] => 34
+    [P] => 34
+    [K] => 34
+    [ph] => 34
+    [city] => Balayan
+)
+
+[2025-11-02 16:37:50] Payload to Python: {"N":34,"P":34,"K":34,"ph":34,"city":"Balayan"}
+[2025-11-02 16:37:50] Failed to start Python process
+[2025-11-02 16:46:16] Input: Array
+(
+    [N] => 12
+    [P] => 12
+    [K] => 12
+    [ph] => 12
+    [city] => Balayan
+)
+
+[2025-11-02 16:46:16] Payload to Python: {"N":12,"P":12,"K":12,"ph":12,"city":"Balayan"}
+[2025-11-02 16:46:17] Python stdout: 
+Python stderr: Traceback (most recent call last):
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py", line 2, in <module>
+    import requests
+ModuleNotFoundError: No module named 'requests'
+
+Return code: 1
+[2025-11-02 16:55:31] Input: Array
+(
+    [N] => 11
+    [P] => 11
+    [K] => 11
+    [ph] => 11
+    [city] => Balayan
+)
+
+[2025-11-02 16:55:31] Payload to Python: {"N":11,"P":11,"K":11,"ph":11,"city":"Balayan"}
+[2025-11-02 16:55:32] Python stdout: 
+Python stderr: Traceback (most recent call last):
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py", line 2, in <module>
+    import requests
+ModuleNotFoundError: No module named 'requests'
+
+Return code: 1
+  [2025-11-02 16:59:07] Input: Array
+(
+    [N] => 33
+    [P] => 33
+    [K] => 33
+    [ph] => 33
+    [city] => Balayan
+)
+
+[2025-11-02 16:59:07] Payload to Python: {"N":33,"P":33,"K":33,"ph":33,"city":"Balayan"}
+[2025-11-02 16:59:08] Python stdout: 
+Python stderr: Traceback (most recent call last):
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py", line 2, in <module>
+    import requests
+ModuleNotFoundError: No module named 'requests'
+
+Return code: 1
+[2025-11-02 17:22:54] Input received: Array
+(
+    [N] => 90
+    [P] => 40
+    [K] => 45
+    [ph] => 6.7
+    [city] => Balayan
+)
+
+[2025-11-02 17:22:54] Payload to Python: {"N":90,"P":40,"K":45,"ph":6.7,"city":"Balayan"}
+[2025-11-02 17:22:54] Python stdout: 
+[2025-11-02 17:22:54] Python stderr: Traceback (most recent call last):
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py", line 2, in <module>
+    import requests
+ModuleNotFoundError: No module named 'requests'
+
+[2025-11-02 17:22:54] Python return code: 1
+[2025-11-02 17:27:29] Input received: Array
+(
+    [N] => 34
+    [P] => 34
+    [K] => 34
+    [ph] => 2
+    [city] => Balayan
+)
+
+[2025-11-02 17:27:29] Payload to Python: {"N":34,"P":34,"K":34,"ph":2,"city":"Balayan"}
+[2025-11-02 17:27:29] Python stdout: 
+[2025-11-02 17:27:29] Python stderr: Traceback (most recent call last):
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py", line 2, in <module>
+    import requests
+ModuleNotFoundError: No module named 'requests'
+
+[2025-11-02 17:27:29] Python return code: 1
+[2025-11-02 17:35:48] Input received: Array
+(
+    [N] => 90
+    [P] => 40
+    [K] => 45
+    [ph] => 6.5
+    [city] => Balayan
+)
+
+[2025-11-02 17:35:48] Payload to Python: {"N":90,"P":40,"K":45,"ph":6.5,"city":"Balayan"}
+[2025-11-02 17:35:49] Python stdout: 
+[2025-11-02 17:35:49] Python stderr: Traceback (most recent call last):
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py", line 2, in <module>
+    import requests
+  File "C:\Program Files\Python311\Lib\site-packages\requests\__init__.py", line 43, in <module>
+    import urllib3
+ModuleNotFoundError: No module named 'urllib3'
+
+[2025-11-02 17:35:49] Python return code: 1
+[2025-11-02 17:38:02] Input received: Array
+(
+    [N] => 80
+    [P] => 50
+    [K] => 45
+    [ph] => 7
+    [city] => Balayan
+)
+
+[2025-11-02 17:38:02] Payload to Python: {"N":80,"P":50,"K":45,"ph":7,"city":"Balayan"}
+[2025-11-02 17:38:05] Python stdout: 
+[2025-11-02 17:38:05] Python stderr: C:\Program Files\Python311\Lib\site-packages\requests\__init__.py:86: RequestsDependencyWarning: Unable to find acceptable character detection dependency (chardet or charset_normalizer).
+  warnings.warn(
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py", line 6, in <module>
+    from smart_care_model import CropPredictor
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\smart_care_model.py", line 5, in <module>
+    import joblib
+  File "C:\Program Files\Python311\Lib\site-packages\joblib\__init__.py", line 120, in <module>
+    from .memory import MemorizedResult, Memory, expires_after, register_store_backend
+  File "C:\Program Files\Python311\Lib\site-packages\joblib\memory.py", line 11, in <module>
+    import asyncio
+  File "C:\Program Files\Python311\Lib\asyncio\__init__.py", line 42, in <module>
+    from .windows_events import *
+  File "C:\Program Files\Python311\Lib\asyncio\windows_events.py", line 8, in <module>
+    import _overlapped
+OSError: [WinError 10106] The requested service provider could not be loaded or initialized
+
+[2025-11-02 17:38:05] Python return code: 1
+[2025-11-02 17:50:47] Input received: Array
+(
+)
+
+[2025-11-02 17:50:47] Missing parameter: N
+[2025-11-02 17:50:49] Input received: Array
+(
+)
+
+[2025-11-02 17:50:49] Missing parameter: N
+[2025-11-02 17:50:50] Input received: Array
+(
+)
+
+[2025-11-02 17:50:50] Missing parameter: N
+[2025-11-02 17:50:50] Input received: Array
+(
+)
+
+[2025-11-02 17:50:50] Missing parameter: N
+[2025-11-02 17:50:50] Input received: Array
+(
+)
+
+[2025-11-02 17:50:50] Missing parameter: N
+[2025-11-02 17:50:50] Input received: Array
+(
+)
+
+[2025-11-02 17:50:50] Missing parameter: N
+[2025-11-02 17:50:50] Input received: Array
+(
+)
+
+[2025-11-02 17:50:50] Missing parameter: N
+[2025-11-02 17:51:13] Input received: Array
+(
+    [N] => 22
+    [P] => 22
+    [K] => 22
+    [ph] => 22
+    [city] => Balayan
+)
+
+[2025-11-02 17:51:13] Payload to Python: {"N":22,"P":22,"K":22,"ph":22,"city":"Balayan"}
+[2025-11-02 17:51:14] Python stdout: 
+[2025-11-02 17:51:14] Python stderr: Traceback (most recent call last):
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py", line 6, in <module>
+    from smart_care_model import CropPredictor
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\smart_care_model.py", line 5, in <module>
+    import joblib
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\venv\Lib\site-packages\joblib\__init__.py", line 120, in <module>
+    from .memory import MemorizedResult, Memory, expires_after, register_store_backend
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\venv\Lib\site-packages\joblib\memory.py", line 11, in <module>
+    import asyncio
+  File "C:\Program Files\Python311\Lib\asyncio\__init__.py", line 42, in <module>
+    from .windows_events import *
+  File "C:\Program Files\Python311\Lib\asyncio\windows_events.py", line 8, in <module>
+    import _overlapped
+OSError: [WinError 10106] The requested service provider could not be loaded or initialized
+
+[2025-11-02 17:51:14] Python return code: 1
+[2025-11-03 06:19:44] Input received: Array
+(
+    [N] => 13
+    [P] => 13
+    [K] => 13
+    [ph] => 13
+    [city] => Balayan
+)
+
+[2025-11-03 06:19:44] Payload to Python: {"N":13,"P":13,"K":13,"ph":13,"city":"Balayan"}
+[2025-11-03 06:19:47] Python stdout: 
+[2025-11-03 06:19:47] Python stderr: Traceback (most recent call last):
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py", line 6, in <module>
+    from smart_care_model import CropPredictor
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\smart_care_model.py", line 5, in <module>
+    import joblib
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\venv\Lib\site-packages\joblib\__init__.py", line 120, in <module>
+    from .memory import MemorizedResult, Memory, expires_after, register_store_backend
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\venv\Lib\site-packages\joblib\memory.py", line 11, in <module>
+    import asyncio
+  File "C:\Program Files\Python311\Lib\asyncio\__init__.py", line 42, in <module>
+    from .windows_events import *
+  File "C:\Program Files\Python311\Lib\asyncio\windows_events.py", line 8, in <module>
+    import _overlapped
+OSError: [WinError 10106] The requested service provider could not be loaded or initialized
+
+[2025-11-03 06:19:47] Python return code: 1
+[2025-11-03 06:21:17] Input received: Array
+(
+    [N] => 34
+    [P] => 34
+    [K] => 34
+    [ph] => 34
+    [city] => Balayan
+)
+
+[2025-11-03 06:21:17] Payload to Python: {"N":34,"P":34,"K":34,"ph":34,"city":"Balayan"}
+[2025-11-03 06:21:19] Python stdout: 
+[2025-11-03 06:21:19] Python stderr: Traceback (most recent call last):
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py", line 6, in <module>
+    from smart_care_model import CropPredictor
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\smart_care_model.py", line 5, in <module>
+    import joblib
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\venv\Lib\site-packages\joblib\__init__.py", line 120, in <module>
+    from .memory import MemorizedResult, Memory, expires_after, register_store_backend
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\venv\Lib\site-packages\joblib\memory.py", line 11, in <module>
+    import asyncio
+  File "C:\Program Files\Python311\Lib\asyncio\__init__.py", line 42, in <module>
+    from .windows_events import *
+  File "C:\Program Files\Python311\Lib\asyncio\windows_events.py", line 8, in <module>
+    import _overlapped
+OSError: [WinError 10106] The requested service provider could not be loaded or initialized
+
+[2025-11-03 06:21:19] Python return code: 1
+[2025-11-03 06:24:41] Input received: Array
+(
+    [N] => 90
+    [P] => 40
+    [K] => 45
+    [ph] => 6.7
+    [city] => Balayan
+)
+
+  [2025-11-03 06:24:41] Payload to Python: {"N":90,"P":40,"K":45,"ph":6.7,"city":"Balayan"}
+  [2025-11-03 06:24:41] Environment PATH: C:\Program Files\Python311\Scripts\;C:\Program Files\Python311\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Admin\AppData\Local\Programs\cursor\resources\app\bin;C:\Users\Admin\AppData\Local\GitHubDesktop\bin;C:\Users\Admin\AppData\Local\spicetify;C:\Users\Admin\AppData\Roaming\npm;C:\xampp\php;C:\Users\Admin\AppData\Local\Programs\Windsurf\bin;C:\Users\Admin\AppData\Local\Python\bin;C:\Users\Admin\AppData\Roaming\Python\Python311\Scripts
+  [2025-11-03 06:24:41] Python executable: C:\xampp\htdocs\Agrilink\backend\api\analytics/venv/Scripts/python.exe
+  [2025-11-03 06:24:41] PYTHONPATH: C:\xampp\htdocs\Agrilink\backend\api\analytics/venv/Lib/site-packages
+  [2025-11-03 06:24:41] PYTHONHOME: C:\xampp\htdocs\Agrilink\backend\api\analytics/venv
+  [2025-11-03 06:24:41] Python stdout: 
+  [2025-11-03 06:24:41] Python stderr: Python path configuration:
+    PYTHONHOME = 'C:\xampp\htdocs\Agrilink\backend\api\analytics/venv'
+    PYTHONPATH = 'C:\xampp\htdocs\Agrilink\backend\api\analytics/venv/Lib/site-packages'
+    program name = 'C:\Program Files\Python311\python.exe'
+    isolated = 0  
+    environment = 1
+    user site = 1
+    safe_path = 0
+    import site = 1
+    is in build tree = 0
+    stdlib dir = 'C:\xampp\htdocs\Agrilink\backend\api\analytics\venv\Lib'
+    sys._base_executable = 'C:\\Program Files\\Python311\\python.exe'
+    sys.base_prefix = 'C:\\xampp\\htdocs\\Agrilink\\backend\\api\\analytics/venv'
+    sys.base_exec_prefix = 'C:\\xampp\\htdocs\\Agrilink\\backend\\api\\analytics/venv'
+    sys.platlibdir = 'DLLs'
+    sys.executable = 'C:\\xampp\\htdocs\\Agrilink\\backend\\api\\analytics\\venv\\Scripts\\python.exe'
+    sys.prefix = 'C:\\xampp\\htdocs\\Agrilink\\backend\\api\\analytics/venv'
+    sys.exec_prefix = 'C:\\xampp\\htdocs\\Agrilink\\backend\\api\\analytics/venv'
+    sys.path = [
+      'C:\\xampp\\htdocs\\Agrilink\\backend\\api\\analytics\\venv\\Lib\\site-packages',
+      'C:\\Program Files\\Python311\\python311.zip',
+      'C:\\xampp\\htdocs\\Agrilink\\backend\\api\\analytics\\venv\\DLLs',
+      'C:\\xampp\\htdocs\\Agrilink\\backend\\api\\analytics\\venv\\Lib',
+      'C:\\xampp\\htdocs\\Agrilink\\backend\\api\\analytics\\venv\\Scripts',
+    ]
+  Fatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding
+  Python runtime state: core initialized
+  ModuleNotFoundError: No module named 'encodings'
+
+  Current thread 0x00002d38 (most recent call first):
+    <no Python frame>
+
+  [2025-11-03 06:24:41] Python return code: 1
+[2025-11-03 06:40:19] Input received: Array
+(
+    [N] => 90
+    [P] => 35
+    [K] => 46
+    [ph] => 7
+    [city] => Balayan
+)
+
+[2025-11-03 06:40:19] Payload to Python: {"N":90,"P":35,"K":46,"ph":7,"city":"Balayan"}
+[2025-11-03 06:40:19] Shell command: cd "C:\xampp\htdocs\Agrilink\backend\api\analytics" && "C:\xampp\htdocs\Agrilink\backend\api\analytics/venv/Scripts/python.exe" "C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py" 2>&1
+[2025-11-03 06:40:19] Shell output: Smart Care Engine started
+Raw input: 
+{"error": "no input"}
+
+[2025-11-03 06:40:19] Invalid JSON from shell output: Smart Care Engine started
+Raw input: 
+{"error": "no input"}
+
+[2025-11-03 06:40:34] Input received: Array
+(
+)
+
+[2025-11-03 06:40:34] Missing parameter: N
+[2025-11-03 06:43:41] Input received: Array
+(
+)
+
+[2025-11-03 06:43:41] Missing parameter: N
+[2025-11-03 06:43:46] Input received: Array
+(
+)
+
+[2025-11-03 06:43:46] Missing parameter: N
+[2025-11-03 06:44:48] Input received: Array
+(
+    [N] => 70
+    [P] => 43
+    [K] => 34
+    [ph] => 5
+    [city] => Balayan
+)
+
+[2025-11-03 06:44:48] Payload to Python: {"N":70,"P":43,"K":34,"ph":5,"city":"Balayan"}
+[2025-11-03 06:44:50] Python stdout: 
+[2025-11-03 06:44:50] Python stderr: Traceback (most recent call last):
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py", line 6, in <module>
+    from smart_care_model import CropPredictor
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\smart_care_model.py", line 5, in <module>
+    import joblib
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\venv\Lib\site-packages\joblib\__init__.py", line 120, in <module>
+    from .memory import MemorizedResult, Memory, expires_after, register_store_backend
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\venv\Lib\site-packages\joblib\memory.py", line 11, in <module>
+    import asyncio
+  File "C:\Program Files\Python311\Lib\asyncio\__init__.py", line 42, in <module>
+    from .windows_events import *
+  File "C:\Program Files\Python311\Lib\asyncio\windows_events.py", line 8, in <module>
+    import _overlapped
+OSError: [WinError 10106] The requested service provider could not be loaded or initialized
+
+[2025-11-03 06:44:50] Python return code: 1
+[2025-11-03 06:56:11] Input received: Array
+(
+    [N] => 34
+    [P] => 43
+    [K] => 34
+    [ph] => 3
+    [city] => Balayan
+)
+
+[2025-11-03 06:56:11] Payload to Python: {"N":34,"P":43,"K":34,"ph":3,"city":"Balayan"}
+[2025-11-03 06:56:11] Shell command: cd /d "C:\xampp\htdocs\Agrilink\backend\api\analytics" && echo "{ N :34, P :43, K :34, ph :3, city : Balayan }" | "C:\xampp\htdocs\Agrilink\backend\api\analytics/venv/Scripts/python.exe" "C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py" 2>&1
+[2025-11-03 06:56:16] Shell output: Smart Care Engine started
+Raw input: "{ N :34, P :43, K :34, ph :3, city : Balayan }" 
+
+Parsed JSON input: { N :34, P :43, K :34, ph :3, city : Balayan }
+Unhandled exception: Traceback (most recent call last):
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py", line 68, in main
+    N = req.get("N")
+        ^^^^^^^
+AttributeError: 'str' object has no attribute 'get'
+
+{"error": "AttributeError: 'str' object has no attribute 'get'"}
+
+[2025-11-03 06:56:16] Invalid JSON from shell output: Smart Care Engine started
+Raw input: "{ N :34, P :43, K :34, ph :3, city : Balayan }" 
+
+Parsed JSON input: { N :34, P :43, K :34, ph :3, city : Balayan }
+Unhandled exception: Traceback (most recent call last):
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py", line 68, in main
+    N = req.get("N")
+        ^^^^^^^
+AttributeError: 'str' object has no attribute 'get'
+
+{"error": "AttributeError: 'str' object has no attribute 'get'"}
+
+  [2025-11-03 06:59:12] Input received: Array
+  (
+      [N] => 90
+      [P] => 40
+      [K] => 45
+      [ph] => 6.7
+      [city] => Balayan
+  )
+
+  [2025-11-03 06:59:12] Payload to Python: {"N":90,"P":40,"K":45,"ph":6.7,"city":"Balayan"}
+  [2025-11-03 06:59:12] Python stdout: 
+  [2025-11-03 06:59:12] Python stderr: Traceback (most recent call last):
+    File "C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py", line 6, in <module>
+      from smart_care_model import CropPredictor
+    File "C:\xampp\htdocs\Agrilink\backend\api\analytics\smart_care_model.py", line 5, in <module>
+      import joblib
+    File "C:\xampp\htdocs\Agrilink\backend\api\analytics\venv\Lib\site-packages\joblib\__init__.py", line 120, in <module>
+      from .memory import MemorizedResult, Memory, expires_after, register_store_backend
+    File "C:\xampp\htdocs\Agrilink\backend\api\analytics\venv\Lib\site-packages\joblib\memory.py", line 11, in <module>
+      import asyncio
+    File "C:\Program Files\Python311\Lib\asyncio\__init__.py", line 42, in <module>
+      from .windows_events import *
+    File "C:\Program Files\Python311\Lib\asyncio\windows_events.py", line 8, in <module>
+      import _overlapped
+  OSError: [WinError 10106] The requested service provider could not be loaded or initialized
+
+  [2025-11-03 06:59:12] Python return code: 1
+[2025-11-03 07:07:33] Input received: Array
+(
+    [N] => 90
+    [P] => 40
+    [K] => 45
+    [ph] => 6.5
+    [city] => Balayan
+)
+
+[2025-11-03 07:07:33] Payload to Python: {"N":90,"P":40,"K":45,"ph":6.5,"city":"Balayan"}
+[2025-11-03 07:07:35] Python stdout: {"error": "Initialization error: [WinError 10106] The requested service provider could not be loaded or initialized"}
+
+[2025-11-03 07:07:35] Python stderr: 
+[2025-11-03 07:07:35] Python return code: 1
+[2025-11-03 07:37:19] Input received: Array
+(
+    [N] => 45
+    [P] => 45
+    [K] => 45
+    [ph] => 6
+    [city] => Balayan
+)
+
+[2025-11-03 07:37:19] Payload to Python: {"N":45,"P":45,"K":45,"ph":6,"city":"Balayan"}
+[2025-11-03 07:37:19] Failed to start Python process
+[2025-11-03 08:02:11] Input received: Array
+(
+    [N] => 90
+    [P] => 40
+    [K] => 45
+    [ph] => 7
+    [city] => Balayan
+)
+
+[2025-11-03 08:02:11] Payload to Python: {"N":90,"P":40,"K":45,"ph":7,"city":"Balayan"}
+[2025-11-03 08:02:11] Running command: C:\xampp\htdocs\Agrilink\backend\api\analytics/venv/Scripts/python.exe C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py
+[2025-11-03 08:02:13] Python stdout: 
+[2025-11-03 08:02:13] Python stderr: Traceback (most recent call last):
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py", line 6, in <module>
+    from smart_care_model import CropPredictor
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\smart_care_model.py", line 5, in <module>
+    import joblib
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\venv\Lib\site-packages\joblib\__init__.py", line 120, in <module>
+    from .memory import MemorizedResult, Memory, expires_after, register_store_backend
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\venv\Lib\site-packages\joblib\memory.py", line 11, in <module>
+    import asyncio
+  File "C:\Program Files\Python311\Lib\asyncio\__init__.py", line 42, in <module>
+    from .windows_events import *
+  File "C:\Program Files\Python311\Lib\asyncio\windows_events.py", line 8, in <module>
+    import _overlapped
+OSError: [WinError 10106] The requested service provider could not be loaded or initialized
+
+[2025-11-03 08:02:13] Python return code: 1
+[2025-11-03 08:16:18] Input received: Array
+(
+    [N] => 54
+    [P] => 54
+    [K] => 45
+    [ph] => 6
+    [city] => Balayan
+)
+
+[2025-11-03 08:16:18] Payload to Python: {"N":54,"P":54,"K":45,"ph":6,"city":"Balayan"}
+[2025-11-03 08:16:18] Running command: C:\xampp\htdocs\Agrilink\backend\api\analytics/venv/Scripts/python.exe C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py
+[2025-11-03 08:16:19] Python stdout: 
+[2025-11-03 08:16:19] Python stderr: Traceback (most recent call last):
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py", line 4, in <module>
+    import asyncio
+  File "C:\Program Files\Python311\Lib\asyncio\__init__.py", line 42, in <module>
+    from .windows_events import *
+  File "C:\Program Files\Python311\Lib\asyncio\windows_events.py", line 8, in <module>
+    import _overlapped
+OSError: [WinError 10106] The requested service provider could not be loaded or initialized
+
+[2025-11-03 08:16:19] Python return code: 1
+[2025-11-03 08:21:10] Input received: Array
+(
+    [N] => 43
+    [P] => 34
+    [K] => 34
+    [ph] => 4
+    [city] => Balayan
+)
+
+[2025-11-03 08:21:10] Payload to Python: {"N":43,"P":34,"K":34,"ph":4,"city":"Balayan"}
+[2025-11-03 08:21:10] Running command: C:\xampp\htdocs\Agrilink\backend\api\analytics/venv/Scripts/python.exe C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py
+[2025-11-03 08:21:11] Python stdout: 
+[2025-11-03 08:21:11] Python stderr: Traceback (most recent call last):
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py", line 12, in <module>
+    import joblib
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\venv\Lib\site-packages\joblib\__init__.py", line 120, in <module>
+    from .memory import MemorizedResult, Memory, expires_after, register_store_backend
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\venv\Lib\site-packages\joblib\memory.py", line 11, in <module>
+    import asyncio
+ModuleNotFoundError: import of asyncio halted; None in sys.modules
+
+[2025-11-03 08:21:11] Python return code: 1
+[2025-11-03 08:32:00] Input received: Array
+(
+    [N] => 43
+    [P] => 34
+    [K] => 34
+    [ph] => 3
+    [city] => Balayan
+) 
+
+[2025-11-03 08:32:00] Payload to Python: {"N":43,"P":34,"K":34,"ph":3,"city":"Balayan"}
+[2025-11-03 08:32:00] Running command: C:\xampp\htdocs\Agrilink\backend\api\analytics/venv/Scripts/python.exe C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py
+[2025-11-03 08:32:03] Python stdout: 
+[2025-11-03 08:32:03] Python stderr: Traceback (most recent call last):
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics/smart_care_engine.py", line 12, in <module>
+    import joblib
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\venv\Lib\site-packages\joblib\__init__.py", line 120, in <module>
+    from .memory import MemorizedResult, Memory, expires_after, register_store_backend
+  File "C:\xampp\htdocs\Agrilink\backend\api\analytics\venv\Lib\site-packages\joblib\memory.py", line 11, in <module>
+    import asyncio
+ModuleNotFoundError: import of asyncio halted; None in sys.modules
+
+[2025-11-03 08:32:03] Python return code: 1
+[2025-11-03 12:38:03] === New Request ===
+[2025-11-03 12:38:03] Command: "C:\Program Files\Python310\python.exe" -u "C:\xampp\htdocs\Agrilink\backend\api\analytics\smart_care_engine.py"
+[2025-11-03 12:38:03] Working Dir: C:\xampp\htdocs\Agrilink\backend\api\analytics
+[2025-11-03 12:38:03] Payload: {"N":90,"P":40,"K":45,"ph":7,"city":"Balayan"}
+[2025-11-03 12:38:03] Exit code: 0
+[2025-11-03 12:38:03] STDOUT length: 862
+[2025-11-03 12:38:03] STDOUT: {"recommended_crop": "papaya", "probabilities": {"apple": 0.0, "banana": 3.7598253981943146e-29, "blackgram": 7.8999886146034275e-81, "chickpea": 0.0, "coconut": 3.2779444182568754e-17, "coffee": 5.970343305071882e-10, "cotton": 2.39137947561391e-19, "grapes": 0.0, "jute": 1.1314800335529555e-22, "kidneybeans": 3.5324474733830525e-245, "lentil": 8.911484070236679e-46, "maize": 1.2494093715372027e-18, "mango": 7.413699689507473e-220, "mothbeans": 9.457092788638147e-22, "mungbean": 3.3541262699102936e-23, "muskmelon": 2.6467979577877523e-15, "orange": 3.1678819912147746e-118, "papaya": 0.9999695437380555, "pigeonpeas": 1.0588185527043605e-28, "pomegranate": 1.89e-320, "rice": 3.045553239485761e-05, "watermelon": 1.3251288567777419e-10}, "features": {"N": 90.0, "P": 40.0, "K": 45.0, "temperature": 26.91, "humidity": 87.0, "ph": 7.0, "rainfall": 0.13}}
+
+[2025-11-03 12:38:03] STDERR length: 0
+[2025-11-03 12:38:03] STDERR: 
+[2025-11-03 12:38:03] === End Request ===
+

@@ -1,2 +1,2 @@
-<h1>Settings</h1>
-<p>This is the Settings page.</p>
+<h1>People</h1>
+<p>This is the People page.</p>

@@ -1,3 +1,14 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<style>
+.fixed-crop-img {
+  height: 180px;
+  object-fit: cover;
+  width: 100%;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+</style>
+
 <div class="container py-4">
   <h2 class="mb-3">Crop Catalogue</h2>
 
@@ -14,7 +25,7 @@
 
   <!-- On your farm -->
   <h5>On your farm</h5>
-  <div id="onFarmCrops" class="row row-cols-2 row-cols-md-4 g-3 mb-4"></div>
+<div id="onFarmCrops" class="row row-cols-2 row-cols-md-4 g-3 mb-4"></div>
 
   <!-- Add to your farm -->
   <h5>Add to your farm</h5>
@@ -65,43 +76,86 @@
   </div>
 </div>
 
+<!-- 🔹 Add New Crop Button -->
+<div class="text-end mb-3">
+  <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#newCropModal">
+    <i class="bi bi-plus-circle"></i> Add New Crop
+  </button>
+</div>
+
+<!-- 🔹 Add New Crop Modal -->
+<div class="modal fade" id="newCropModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add New Crop</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="newCropForm">
+          <div class="mb-3">
+            <label for="crop_name" class="form-label">Crop Name</label>
+            <input type="text" id="crop_name" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <input type="text" id="category" class="form-control" placeholder="e.g. Vegetable, Fruit, Grain">
+          </div>
+
+          <div class="mb-3">
+            <label for="duration" class="form-label">Duration (days)</label>
+            <input type="number" id="duration" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea id="description" class="form-control" rows="3"></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="image_path" class="form-label">Image Path (optional)</label>
+            <input type="text" id="image_path" class="form-control" placeholder="assets\images">
+          </div>
+
+          <button type="submit" class="btn btn-success w-100">Save Crop</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 let allFields = [];
 let allCrops = [];
 let map;
-const BASE = window.location.origin + "/Agrilink"; // use single absolute base
 
 // 🔹 Initialization
 document.addEventListener("DOMContentLoaded", cropManagementInit);
 
 async function cropManagementInit() {
   try {
-    const cropRes = await fetch(`${BASE}/backend/api/crops/getCrops.php`);
-    if (!cropRes.ok) throw new Error('Failed to load crops: ' + cropRes.status);
+    const cropRes = await fetch("backend/api/crops/getCrops.php");
     const cropData = await cropRes.json();
 
     allCrops = [...(cropData.onFarm || []), ...(cropData.notOnFarm || [])]; // combine both lists
 
-    renderCrops(cropData.onFarm || [], "onFarmCrops", true);
-    renderCrops(cropData.notOnFarm || [], "notOnFarmCrops", false);
+    renderCrops(cropData.onFarm, "onFarmCrops", true);
+    renderCrops(cropData.notOnFarm, "notOnFarmCrops", false);
 
     await loadFields();
 
     // Search feature
-    const searchEl = document.getElementById("searchCrop");
-    if (searchEl) {
-      searchEl.addEventListener("input", (e) => {
-        const term = e.target.value.toLowerCase();
-        document.querySelectorAll(".crop-card").forEach(card => {
-          const name = (card.dataset.name || '').toLowerCase();
-          card.style.display = name.includes(term) ? "" : "none";
-        });
+    document.getElementById("searchCrop").addEventListener("input", (e) => {
+      const term = e.target.value.toLowerCase();
+      document.querySelectorAll(".crop-card").forEach(card => {
+        const name = card.dataset.name.toLowerCase();
+        card.style.display = name.includes(term) ? "" : "none";
       });
-    }
+    });
 
     // 🟢 Planting Date -> Expected Harvest auto calculation
-    const plantingEl = document.getElementById("planting_date");
-    if (plantingEl) plantingEl.addEventListener("change", handlePlantingDateChange);
+    document.getElementById("planting_date").addEventListener("change", handlePlantingDateChange);
 
   } catch (err) {
     console.error("Error loading data:", err);
@@ -111,7 +165,6 @@ async function cropManagementInit() {
 // 🔹 Render Crops
 function renderCrops(list, containerId, onFarm) {
   const container = document.getElementById(containerId);
-  if (!container) return;
   container.innerHTML = "";
 
   if (!list || list.length === 0) {
@@ -122,24 +175,19 @@ function renderCrops(list, containerId, onFarm) {
   list.forEach(crop => {
     const col = document.createElement("div");
     col.className = "col crop-card";
-    col.dataset.name = crop.crop_name || '';
-    col.dataset.id = crop.crop_id || '';
-
-    // resolve image path
-    let imgSrc = crop.image_path || 'assets/images/placeholder.jpg';
-    if (!imgSrc.startsWith('http') && !imgSrc.startsWith('/')) imgSrc = BASE + '/' + imgSrc;
-    if (imgSrc.startsWith('//')) imgSrc = window.location.protocol + imgSrc;
+    col.dataset.name = crop.crop_name;
+    col.dataset.id = crop.crop_id;
 
     col.innerHTML = `
       <div class="card shadow-sm h-100">
-        <img src="${imgSrc}"
-             class="card-img-top"
-             alt="${(crop.crop_name || '')}">
+        <img src="${crop.image_path || 'assets/images/placeholder.jpg'}"
+          class="card-img-top fixed-crop-img"
+          alt="${crop.crop_name}">
         <div class="card-body text-center">
-          <h6>${crop.crop_name || ''}</h6>
+          <h6>${crop.crop_name}</h6>
           ${
             onFarm
-              ? `<span class="badge bg-${getStatusColor(crop.status)}">${crop.status || ''}</span>`
+              ? `<span class="badge bg-${getStatusColor(crop.status)}">${crop.status}</span>`
               : `<button class="btn btn-sm btn-outline-success mt-2">Add</button>`
           }
         </div>
@@ -162,8 +210,8 @@ function getStatusColor(status) {
 // 🔹 Fetch and populate fields
 async function loadFields() {
   try {
-    const res = await fetch(`${BASE}/backend/api/map/get_fields.php`);
-    if (!res.ok) throw new Error('Failed to load fields: ' + res.status);
+    const BASE_URL = window.location.origin + "/Agrilink";
+    const res = await fetch(`${BASE_URL}/backend/api/map/get_fields.php`);
     allFields = await res.json();
     populateFieldDropdown(allFields);
   } catch (err) {
@@ -180,7 +228,7 @@ function populateFieldDropdown(fields) {
     return;
   }
 
-  select.innerHTML = fields.map(f =>
+  select.innerHTML = fields.map(f => 
     `<option value="${f.field_id}">
         ${f.name || '(Unnamed Field)'}
      </option>`
@@ -193,23 +241,16 @@ document.addEventListener("click", (e) => {
     const card = e.target.closest(".crop-card");
     const cropId = card.dataset.id;
 
-    const selectedCrop = allCrops.find(c => String(c.crop_id) === String(cropId));
-    const selCropIdEl = document.getElementById("selectedCropId");
-    const selCropDurEl = document.getElementById("selectedCropDuration");
-    if (selCropIdEl) selCropIdEl.value = cropId;
-    if (selCropDurEl) selCropDurEl.value = selectedCrop?.duration || 0;
+    const selectedCrop = allCrops.find(c => c.crop_id === cropId);
+    document.getElementById("selectedCropId").value = cropId;
+    document.getElementById("selectedCropDuration").value = selectedCrop?.duration || 0;
 
     // Reset date fields
-    const plantingEl = document.getElementById("planting_date");
-    const expectedEl = document.getElementById("expected_harvest");
-    if (plantingEl) plantingEl.value = "";
-    if (expectedEl) expectedEl.value = "";
+    document.getElementById("planting_date").value = "";
+    document.getElementById("expected_harvest").value = "";
 
-    const modalEl = document.getElementById("addCropModal");
-    if (modalEl) {
-      const modal = new bootstrap.Modal(modalEl);
-      modal.show();
-    }
+    const modal = new bootstrap.Modal(document.getElementById("addCropModal"));
+    modal.show();
 
     loadMap();
   }
@@ -217,11 +258,8 @@ document.addEventListener("click", (e) => {
 
 // 🔹 Auto-calculate Expected Harvest Date
 function handlePlantingDateChange() {
-  const plantingEl = document.getElementById("planting_date");
-  const durationEl = document.getElementById("selectedCropDuration");
-  const expectedEl = document.getElementById("expected_harvest");
-  const plantingDate = plantingEl ? plantingEl.value : '';
-  const duration = parseInt(durationEl?.value || 0, 10);
+  const plantingDate = document.getElementById("planting_date").value;
+  const duration = parseInt(document.getElementById("selectedCropDuration").value) || 0;
 
   if (!plantingDate || duration <= 0) return;
 
@@ -232,7 +270,7 @@ function handlePlantingDateChange() {
   const mm = String(plant.getMonth() + 1).padStart(2, "0");
   const dd = String(plant.getDate()).padStart(2, "0");
 
-  if (expectedEl) expectedEl.value = `${yyyy}-${mm}-${dd}`;
+  document.getElementById("expected_harvest").value = `${yyyy}-${mm}-${dd}`;
 }
 
 // 🔹 Map loader
@@ -249,66 +287,170 @@ function loadMap() {
 
   allFields.forEach(f => {
     if (f.geometry) {
-      let coords = f.geometry;
-      if (typeof coords === 'string') {
-        try { coords = JSON.parse(coords); } catch(e){ coords = null; }
-      }
-      if (!coords) return;
+      const coords = JSON.parse(f.geometry);
       const layer = L.geoJSON(coords).addTo(map);
       layer.on("click", () => {
-        const fieldSel = document.getElementById("field_id");
-        if (fieldSel) fieldSel.value = f.field_id;
+        document.getElementById("field_id").value = f.field_id;
       });
     }
   });
 }
 
 // 🟢 Handle Add Crop Form Submission
-const addCropForm = document.getElementById("addCropForm");
-if (addCropForm) {
-  addCropForm.addEventListener("submit", async function (e) {
-    e.preventDefault();
+document.getElementById("addCropForm").addEventListener("submit", async function (e) {
+  e.preventDefault();
 
-    const field_id = document.getElementById("field_id")?.value;
-    const crop_id = document.getElementById("selectedCropId")?.value;
-    const planting_date = document.getElementById("planting_date")?.value;
-    const expected_harvest = document.getElementById("expected_harvest")?.value;
+  const field_id = document.getElementById("field_id").value;
+  const crop_id = document.getElementById("selectedCropId").value;
+  const planting_date = document.getElementById("planting_date").value;
+  const expected_harvest = document.getElementById("expected_harvest").value;
 
-    if (!field_id || !crop_id || !planting_date || !expected_harvest) {
-      alert("⚠️ Please complete all fields before saving.");
+  if (!field_id || !crop_id || !planting_date || !expected_harvest) {
+    alert("⚠️ Please complete all fields before saving.");
+    return;
+  }
+
+  try {
+    const BASE_URL = window.location.origin + "/Agrilink";
+    const res = await fetch(`${BASE_URL}/backend/api/crops/addCrop.php`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        field_id,
+        crop_id,
+        planting_date,
+        expected_harvest
+      }),
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      alert("Crop added successfully!");
+      const modal = bootstrap.Modal.getInstance(document.getElementById("addCropModal"));
+      modal.hide();
+
+      // Optionally reload crop list
+      cropManagementInit();
+    } else {
+      alert("Failed to add crop: " + (data.message || "Unknown error"));
+    }
+  } catch (err) {
+    console.error("Error saving crop:", err);
+    alert("Error saving crop. Check console for details.");
+  }
+});
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const BASE_URL = window.location.origin + "/Agrilink";
+
+  try {
+    const res = await fetch(`${BASE_URL}/backend/api/crops/getCrops.php`);
+    const data = await res.json();
+
+    // ✅ Extract data
+    const onFarmCrops = data.onFarm || [];
+    const container = document.getElementById("onFarmCrops");
+    container.innerHTML = "";
+
+    if (onFarmCrops.length === 0) {
+      container.innerHTML = `
+        <div class="col-12 text-center text-muted">
+          No crops currently on your farm.
+        </div>`;
       return;
     }
 
-    try {
-      const res = await fetch(`${BASE}/backend/api/crops/addCrop.php`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          field_id,
-          crop_id,
-          planting_date,
-          expected_harvest
-        }),
-      });
+    onFarmCrops.forEach(crop => {
+      const card = `
+        <div class="col">
+          <div class="card h-100 shadow-sm border-0">
+            <img src="${BASE_URL}/${crop.image_path}" 
+                 class="card-img-top" 
+                 alt="${crop.crop_name}" 
+                 style="height:150px; object-fit:cover;">
+            <div class="card-body">
+              <h6 class="card-title mb-1">${crop.crop_name}</h6>
+              <p class="text-muted small mb-1">Field ID: ${crop.field_id}</p>
+              <p class="text-muted small">Duration: ${crop.duration ? crop.duration + ' days' : 'N/A'}</p>
+            </div>
+          </div>
+        </div>
+      `;
+      container.insertAdjacentHTML("beforeend", card);
+    });
+  } catch (err) {
+    console.error("Error loading crops:", err);
+  }
+});
 
-      const text = await res.text();
-      let data;
-      try { data = JSON.parse(text); } catch (e) { throw new Error('Invalid JSON response: ' + text.slice(0,200)); }
+// 🟢 Handle Add New Crop Form Submission
+document.getElementById("newCropForm").addEventListener("submit", async function (e) {
+  e.preventDefault();
 
-      if (data.success) {
-        alert("Crop added successfully!");
-        const modal = bootstrap.Modal.getInstance(document.getElementById("addCropModal"));
-        if (modal) modal.hide();
+  const crop_name = document.getElementById("crop_name").value.trim();
+  const category = document.getElementById("category").value.trim();
+  const duration = document.getElementById("duration").value.trim();
+  const description = document.getElementById("description").value.trim();
+  const image_path = document.getElementById("image_path").value.trim();
 
-        // Optionally reload crop list
+  if (!crop_name || !duration) {
+    Swal.fire({
+      icon: "warning",
+      title: "Incomplete Form",
+      text: "Please enter at least the crop name and duration.",
+      confirmButtonColor: "#198754"
+    });
+    return;
+  }
+
+  const BASE_URL = window.location.origin + "/Agrilink";
+
+  try {
+    const res = await fetch(`${BASE_URL}/backend/api/crops/addNewCrop.php`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        crop_name,
+        description,
+        category,
+        duration,
+        image_path
+      }),
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      Swal.fire({
+        icon: "success",
+        title: "Crop Added!",
+        text: data.message,
+        confirmButtonColor: "#198754"
+      }).then(() => {
+        // Close modal
+        const modal = bootstrap.Modal.getInstance(document.getElementById("newCropModal"));
+        modal.hide();
+
+        // Reload crop list
         cropManagementInit();
-      } else {
-        alert("Failed to add crop: " + (data.message || "Unknown error"));
-      }
-    } catch (err) {
-      console.error("Error saving crop:", err);
-      alert("Error saving crop. Check console for details.");
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Failed to Add Crop",
+        text: data.message || "Something went wrong.",
+        confirmButtonColor: "#dc3545"
+      });
     }
-  });
-}
+  } catch (err) {
+    console.error("Error adding new crop:", err);
+    Swal.fire({
+      icon: "error",
+      title: "Unexpected Error",
+      text: "Please check console for details.",
+      confirmButtonColor: "#dc3545"
+    });
+  }
+});
 </script>

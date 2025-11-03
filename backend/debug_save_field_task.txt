@@ -3,26 +3,27 @@ Array
     [farmer_ids] => Array
         (
             [0] => 1
+            [1] => 2
         )
 
     [fields] => Array
         (
-            [0] => 17
+            [0] => 15
         )
 
-    [task] => {"id":"8","name":"Field Cleaning"}
-    [task_type] => field cleaning
+    [task] => {"id":"10","name":"Cleaning"}
+    [task_type] => cleaning
     [details] => Array
         (
-            [cleanTarget] => 
-            [useCleaner] => 
+            [cleanTarget] => sd
+            [useCleaner] => no
             [product] => 
             [supplier] => 
             [quantity] => 
             [unit] => L
-            [waterUsage] => 
-            [specificNotes] => 
-            [instructions] => 
+            [waterUsage] => 23
+            [specificNotes] => eww
+            [instructions] => ew
         )
 
 )

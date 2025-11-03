@@ -130,7 +130,7 @@ if (!in_array($page, array_merge($validPages, $taskStepPages))) {
 <script src="assets/js/harvest.js"></script>
 <script> if (typeof harvestInit === "function") harvestInit(); </script>
 
-<?php elseif ($page === 'settings'): ?>
+<?php elseif ($page === 'settings'): ?> 
 <script src="assets/js/settings.js"></script>
 <script> if (typeof settingsInit === "function") settingsInit(); </script>
 

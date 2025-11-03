@@ -25,11 +25,12 @@
     <nav class="header-nav d-flex justify-content-between align-items-center">
         <!-- Logo Section (Left) -->
         <div class="logo-section">
-            <a href="dashboard.php" class="logo-link">
+            <a href="layout.php?page=<?php echo htmlspecialchars($_GET['page'] ?? 'dashboard'); ?>" class="logo-link">
                 <i class="fas fa-seedling me-2"></i>
                 <span>Smart Harvest</span>
             </a>
         </div>
+
 
 
 

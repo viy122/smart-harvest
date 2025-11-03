@@ -355,7 +355,7 @@ if ($res) {
               nextPage = base + 'harvest_task';
             } else if (taskName.includes('field_cleaning')) {
               nextPage = base + 'cleaning_task';
-            } else if (taskName.includes('pest_control')) {
+            } else if (taskName.includes('pest control')) {
               nextPage = base + 'pest_control';
             }
 

@@ -1,0 +1,10 @@
+pandas
+numpy
+scikit-learn
+joblib
+requests
+
+
+
+cd C:\xampp\htdocs\Agrilink\backend\api\analytics
+pip install -r requirements.txt

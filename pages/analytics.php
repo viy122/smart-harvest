@@ -62,7 +62,17 @@
             .recommendation-item { margin-bottom: 1rem; }
         }
 
-
+        .harvest-card {
+        border-radius: 12px;
+        transition: transform 0.2s ease-in-out;
+        }
+        .harvest-card:hover {
+        transform: translateY(-3px);
+        }
+        #smartCareOutput p {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        }
 
     </style>
 
@@ -89,9 +99,8 @@
         </ul>
 
         <div class="tab-content" id="analyticsTabContent">
+
             <!-- Section 1: AI Image Upload (Your Original UI Enhanced) -->
-
-
             <div class="tab-pane fade show active" id="ai-section" role="tabpanel">
                 <div class="card shadow-sm harvest-card">
                     <div class="card-body">
@@ -114,40 +123,88 @@
                 </div>
             </div>
 
-            <!-- Section 2: Manual Diagnosis -->
-            <div class="tab-pane fade" id="manual-section" role="tabpanel">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card shadow-sm harvest-card">
-                            <div class="card-body">
-                                <h5><i class="fas fa-seedling me-2 text-success"></i>Select Crop</h5>
-                                <select id="cropSelect" class="form-select mb-3" required onchange="updateSymptoms()">
+                
+     
+            <!-- SMART CARE RECOMMENDER SECTION TAB 2 -->
 
-                                    <!-- Expand with your crop data -->
-                                </select>
-                            </div>
+            <div class="tab-pane fade" id="manual-section" role="tabpanel">
+            <div class="row g-3">
+
+                <!-- 🟢 Input Section -->
+                <div class="col-md-6">
+                <div class="card shadow-sm harvest-card h-100">
+                    <div class="card-body">
+                    <h4 class="mb-3"><i class="fas fa-seedling text-success me-2"></i>Soil & Environment Data</h4>
+
+                    <!-- Soil nutrients -->
+                    <div class="mb-3">
+                        <label for="N" class="form-label fw-bold">Nitrogen (N)</label>
+                        <input type="number" id="N" class="form-control" placeholder="e.g. 90" step="1" min="0" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="P" class="form-label fw-bold">Phosphorus (P)</label>
+                        <input type="number" id="P" class="form-control" placeholder="e.g. 40" step="1" min="0" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="K" class="form-label fw-bold">Potassium (K)</label>
+                        <input type="number" id="K" class="form-control" placeholder="e.g. 45" step="1" min="0" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="ph" class="form-label fw-bold">Soil pH</label>
+                        <input type="number" id="ph" class="form-control" placeholder="e.g. 6.5" step="0.1" min="0" max="14" required>
+                    </div>
+
+                    <hr>
+
+                    <!-- Weather info (auto-fetched) -->
+                    <h5 class="text-primary mb-3"><i class="fas fa-cloud-sun me-2"></i>Live Weather (Balayan, Batangas)</h5>
+
+                    <div class="row">
+                        <div class="col-4 mb-3">
+                        <label class="form-label fw-bold">Temp (°C)</label>
+                        <input type="text" id="temperature" class="form-control bg-light" readonly>
+                        </div>
+                        <div class="col-4 mb-3">
+                        <label class="form-label fw-bold">Humidity (%)</label>
+                        <input type="text" id="humidity" class="form-control bg-light" readonly>
+                        </div>
+                        <div class="col-4 mb-3">
+                        <label class="form-label fw-bold">Rainfall (mm)</label>
+                        <input type="text" id="rainfall" class="form-control bg-light" readonly>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="card shadow-sm harvest-card">
-                            <div class="card-body">
-                                <h5><i class="fas fa-notes-medical me-2 text-warning"></i>Select Visible Symptoms</h5>
-                                <div id="symptomsContainer" class="symptom-group d-flex flex-wrap">
-                                    <!-- Symptoms populated dynamically by JS -->
-                                </div>
-                            </div>
-                        </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Location</label>
+                        <input type="text" id="city" class="form-control bg-light" value="Balayan, Batangas" readonly>
+                    </div>
+
+                    <button id="runSmartCareBtn" class="btn btn-success w-100 py-2">
+                        <i class="fas fa-brain me-2"></i>Run Smart Care AI
+                    </button>
+
+                    <div id="smartCareResult" class="alert mt-3 text-center fw-bold" style="display:none;"></div>
                     </div>
                 </div>
-                <div class="row mt-3">
-                    <div class="col-12">
-                        <button id="manualDiagnoseBtn" class="btn btn-primary w-100" disabled>
-                            <i class="fas fa-stethoscope me-2"></i> Diagnose Manually
-                        </button>
+                </div>
+
+                <!-- 🟡 Output Section -->
+                <div class="col-md-6">
+                <div class="card shadow-sm harvest-card h-100">
+                    <div class="card-body">
+                    <h4 class="mb-3"><i class="fas fa-lightbulb text-warning me-2"></i>AI Recommendation</h4>
+                    <div id="smartCareOutput" class="p-3 border rounded bg-light" style="min-height: 220px;">
+                        <p class="text-muted mb-0">Fill in the soil details and run Smart Care AI to get the recommendation.</p>
+                    </div>
                     </div>
                 </div>
-                <div id="manualResultAlert" class="alert mt-3" style="display:none;"></div>
+                </div>
+
             </div>
+            </div>
+
+
+
 
 
 
@@ -186,6 +243,8 @@
                     <button type="button" class="btn btn-success" id="saveActivityBtn">
                         <i class="fas fa-save me-1"></i> Save to Activities
                     </button>
+
+
                 </div>
             </div>
         </div>
@@ -194,6 +253,11 @@
 
 
 <script>
+
+
+
+
+// with eather, soil logs reco 
 function analyticsInit() {
   console.log("✅ analyticsInit() initialized properly from analytics.js");
 
@@ -294,5 +358,225 @@ function analyticsInit() {
     }
   });
 }
+
+
+  //js for tab 2 - smart care recommender
+  document.addEventListener("DOMContentLoaded", () => {
+    const API_KEY = "4cac84b627ac52ac5a76e3b3e2349132";
+    const lat = 13.9449;
+    const lon = 120.7517;
+    const city = "Balayan, Batangas";
+
+    const tempEl = document.getElementById("temperature");
+    const humidityEl = document.getElementById("humidity");
+    const rainEl = document.getElementById("rainfall");
+    const btn = document.getElementById("runSmartCareBtn");
+    const resultBox = document.getElementById("smartCareResult");
+    const outputBox = document.getElementById("smartCareOutput");
+
+    // 🌦 Fetch live weather from OpenWeather
+    async function loadWeather() {
+      try {
+        const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`);
+        if (!res.ok) throw new Error('Weather API returned ' + res.status);
+        const data = await res.json();
+
+        const temperature = data.main?.temp || 'N/A';
+        const humidity = data.main?.humidity || 'N/A';
+        const rainfall = data.rain ? (data.rain["1h"] || data.rain["3h"] || 0) : 0;
+
+        if (tempEl) tempEl.value = temperature;
+        if (humidityEl) humidityEl.value = humidity;
+        if (rainEl) rainEl.value = typeof rainfall === 'number' ? rainfall.toFixed(2) : rainfall;
+
+        console.log("✅ Weather loaded:", { temperature, humidity, rainfall });
+      } catch (err) {
+        console.error("❌ Weather fetch failed:", err);
+        if (tempEl) tempEl.value = "N/A";
+        if (humidityEl) humidityEl.value = "N/A";
+        if (rainEl) rainEl.value = "0";
+      }
+    }
+
+    loadWeather(); // auto-load weather data on page load
+
+    // 🌾 Run Smart Care AI
+    if (btn) {
+      btn.addEventListener("click", async () => {
+        const N = parseFloat(document.getElementById("N")?.value);
+        const P = parseFloat(document.getElementById("P")?.value);
+        const K = parseFloat(document.getElementById("K")?.value);
+        const ph = parseFloat(document.getElementById("ph")?.value);
+
+        if (isNaN(N) || isNaN(P) || isNaN(K) || isNaN(ph)) {
+          if (resultBox) {
+            resultBox.style.display = "block";
+            resultBox.className = "alert alert-danger text-center";
+            resultBox.textContent = "⚠️ Please fill in all soil values (N, P, K, pH).";
+          }
+          return;
+        }
+
+        if (resultBox) {
+          resultBox.style.display = "block";
+          resultBox.className = "alert alert-info text-center";
+          resultBox.textContent = "🔄 Analyzing soil and weather conditions... Please wait";
+        }
+
+        if (outputBox) {
+          outputBox.innerHTML = '<div class="text-center py-4"><div class="spinner-border text-success" role="status"><span class="visually-hidden">Loading...</span></div></div>';
+        }
+
+        try {
+          const BASE = window.location.origin + '/Agrilink';
+          const response = await fetch(BASE + "/backend/api/analytics/recommendCrop.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ N, P, K, ph, city: "Balayan" })
+          });
+
+          const text = await response.text();
+          console.log("Backend raw response:", text);
+
+          if (!text || text.trim().length === 0) {
+            throw new Error('Empty response from backend');
+          }
+
+          let data;
+          try {
+            data = JSON.parse(text);
+          } catch (e) {
+            console.error("Invalid JSON:", text);
+            throw new Error('Backend returned invalid JSON. See console for raw response.');
+          }
+
+          if (data.error) {
+            throw new Error(data.error);
+          }
+
+          if (!response.ok) {
+            throw new Error(data.message || 'Backend returned HTTP ' + response.status);
+          }
+
+          // Success - display results
+          const crop = data.recommended_crop;
+          const probs = data.probabilities || {};
+          const featureInfo = data.features || {};
+
+          if (resultBox) {
+            resultBox.className = "alert alert-success text-center fw-bold";
+            resultBox.textContent = `✅ Recommended Crop: ${crop.toUpperCase()}`;
+          }
+
+          // Build probability list with progress bars
+          let probHTML = '<h6 class="text-secondary mb-3"><i class="fas fa-chart-bar me-2"></i>Prediction Confidence:</h6>';
+          const sortedProbs = Object.entries(probs).sort((a, b) => b[1] - a[1]);
+          
+          probHTML += '<div class="mb-3">';
+          sortedProbs.forEach(([label, val]) => {
+            const percent = (val * 100).toFixed(2);
+            const barWidth = Math.max(percent, 5); // minimum 5% for visibility
+            const barColor = percent > 50 ? 'bg-success' : (percent > 20 ? 'bg-warning' : 'bg-secondary');
+            
+            probHTML += `
+              <div class="mb-2">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                  <strong class="small">${label}</strong>
+                  <span class="badge ${barColor}">${percent}%</span>
+                </div>
+                <div class="progress" style="height: 18px;">
+                  <div class="progress-bar ${barColor}" role="progressbar" style="width: ${barWidth}%" 
+                       aria-valuenow="${percent}" aria-valuemin="0" aria-valuemax="100">
+                  </div>
+                </div>
+              </div>
+            `;
+          });
+          probHTML += '</div>';
+
+          if (outputBox) {
+            outputBox.innerHTML = `
+              <div class="alert alert-success border-success">
+                <h5 class="mb-0">
+                  <i class="fas fa-check-circle me-2"></i>Recommended: <strong>${crop.toUpperCase()}</strong>
+                </h5>
+              </div>
+              <hr>
+              ${probHTML}
+              <hr>
+              <h6 class="text-secondary mt-3">
+                <i class="fas fa-cloud-sun me-2"></i>Environmental Data (${city})
+              </h6>
+              <div class="row g-2 small">
+                <div class="col-6">
+                  <div class="p-2 bg-light rounded">
+                    <strong>🌡️ Temperature:</strong><br>
+                    ${featureInfo.temperature || tempEl.value} °C
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="p-2 bg-light rounded">
+                    <strong>💧 Humidity:</strong><br>
+                    ${featureInfo.humidity || humidityEl.value}%
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="p-2 bg-light rounded">
+                    <strong>☔ Rainfall:</strong><br>
+                    ${featureInfo.rainfall || rainEl.value} mm
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="p-2 bg-light rounded">
+                    <strong>🧪 Soil pH:</strong><br>
+                    ${featureInfo.ph || ph}
+                  </div>
+                </div>
+              </div>
+              <div class="mt-3 p-2 bg-light rounded small">
+                <strong>🌾 N-P-K Values:</strong> 
+                ${featureInfo.N || N} - ${featureInfo.P || P} - ${featureInfo.K || K}
+              </div>
+            `;
+          }
+
+          console.log("✅ Smart Care prediction successful:", data);
+
+        } catch (err) {
+          console.error("❌ Smart Care error:", err);
+          
+          if (resultBox) {
+            resultBox.className = "alert alert-danger text-center";
+            resultBox.textContent = "❌ Error: " + err.message;
+          }
+          
+          if (outputBox) {
+            outputBox.innerHTML = `
+              <div class="alert alert-danger">
+                <h6 class="mb-2"><i class="fas fa-exclamation-triangle me-2"></i>Processing Error</h6>
+                <p class="mb-2">${err.message}</p>
+                <hr>
+                <small class="text-muted">
+                  💡 <strong>Troubleshooting:</strong><br>
+                  • Check browser console (F12) for detailed logs<br>
+                  • Verify Python model is trained (run train_crop_model.py)<br>
+                  • Ensure OpenWeather API key is set in server environment<br>
+                  • Check backend/api/analytics/debug_php.log for PHP errors
+                </small>
+              </div>
+            `;
+          }
+        }
+      });
+    }
+
+    console.log("✅ Smart Care AI integration initialized");
+  });
+
+
+
+
+
+
 </script>
 
