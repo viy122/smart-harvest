@@ -3,7 +3,6 @@ Array
     [farmer_ids] => Array
         (
             [0] => 1
-            [1] => 2
         )
 
     [fields] => Array
@@ -11,19 +10,24 @@ Array
             [0] => 15
         )
 
-    [task] => {"id":"10","name":"Cleaning"}
-    [task_type] => cleaning
+    [task] => {"id":"7","name":"Fertilizer Application"}
+    [task_type] => fertilizing
     [details] => Array
         (
-            [cleanTarget] => sd
-            [useCleaner] => no
-            [product] => 
-            [supplier] => 
-            [quantity] => 
-            [unit] => L
-            [waterUsage] => 23
-            [specificNotes] => eww
-            [instructions] => ew
+            [fertilizerType] => urea
+            [applicationMethod] => broadcast
+            [fertilizerAmount] => 34
+            [fertilizerUnit] => kg
+            [fertilizerSupplier] => 
+            [applicationFrequency] => 4
+            [fertilizerNotes] => 
+            [fertilizerInstructions] => ew
+            [crops] => Array
+                (
+                    [0] => 1
+                )
+
+            [field_id] => 15
         )
 
 )
